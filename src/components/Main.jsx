@@ -2,12 +2,12 @@ import './Main.css';
 
 function Main({children}) {
   return (
-    <div className="main">
-    <aside>
+    <div className="main-container">
+    <aside className='aside'>
         <a href="/list">List</a>
         <a href="/create">Create</a>
     </aside>
-    <main>
+    <main className='main'>
         {children}
     </main>
       
