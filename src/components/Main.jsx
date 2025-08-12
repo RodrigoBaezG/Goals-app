@@ -1,15 +1,17 @@
+import './Main.css';
+
 function Main({children}) {
   return (
-    <>
-    <sidenav>
+    <div className="main">
+    <aside>
         <a href="/list">List</a>
         <a href="/create">Create</a>
-    </sidenav>
+    </aside>
     <main>
         {children}
     </main>
       
-    </>
+    </div>
   );
 }
 
