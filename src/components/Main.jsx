@@ -1,13 +1,21 @@
-import './Main.css';
+import MainCss from './Main.module.css';
+import ListIcon from '../img/ListIcon.svg';
+import NewGoalIcon from '../img/newgoal.svg';
+import Link from './Link';
+
 
 function Main({children}) {
   return (
-    <div className="main-container">
-    <aside className='aside'>
-        <a href="/list">List</a>
-        <a href="/create">Create</a>
+    <div className={MainCss.mainContainer}>
+    <aside className={MainCss.aside}>
+        <Link text="Goals list" href="/list">
+          <img className={MainCss.icon} src={ListIcon} alt="Goals List Icon"/>
+        </Link>
+        <Link text="Create goal" href="/create">
+          <img className={MainCss.icon} src={NewGoalIcon} alt="Create Goal Icon" />
+        </Link>        
     </aside>
-    <main className='main'>
+    <main className={MainCss.main}>
         {children}
     </main>
       

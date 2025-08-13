@@ -1,18 +1,19 @@
-import "./Header.css";
-import flechaIcon from '../assets/icono_flecha.svg';
-import profileIcon from '../assets/profile.svg';
+import HeaderCss from "./Header.module.css";
+import GoalsAppIcon from '../img/GoalsAppIcon.svg';
+import profileIcon from '../img/profile.svg';
+import Link from "./Link";
 
 function Header() {
   return (
-    <header className="header">
-      <div className="title-container">
-        <img className="logo" src={flechaIcon} alt="Descripción del icono" />
-        <a className="title" href="/goals">Goals app</a>
+    <header className={HeaderCss.header}>
+      <div className={HeaderCss.titleContainer}>
+        <img className={HeaderCss.icon} src={GoalsAppIcon} alt="Descripción del icono" />
+        <a className={HeaderCss.title} href="/goals">Goals app</a>
       </div>
-      <nav className="profile">
-        <a href="/perfil">
-          <img className="profile-icon" src={profileIcon} />
-        </a>
+      <nav>
+        <Link href="/profile">
+          <img className={HeaderCss.icon} src={profileIcon} />
+        </Link>
       </nav>
     </header>
   );

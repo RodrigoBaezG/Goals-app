@@ -1,0 +1,18 @@
+@reference "tailwindcss";
+
+.header {
+    @apply h-10 flex justify-between items-center shadow bg-white text-gray-700 relative;
+}
+
+.titleContainer {
+    @apply flex items-center pl-4;
+}
+.title{
+    @apply flex uppercase font-semibold text-gray-800;
+}
+.icon {
+    @apply h-8;
+}
+
+
+
