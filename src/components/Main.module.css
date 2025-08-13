@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 .mainContainer {
-    height: calc(100vh - 64px);
+    height: calc(100vh - 88px);
     @apply flex;
 }
 

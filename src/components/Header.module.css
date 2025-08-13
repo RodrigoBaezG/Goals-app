@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 .header {
-    @apply h-10 flex justify-between items-center shadow bg-white text-gray-700 relative;
+    @apply h-14 flex justify-between items-center shadow bg-white text-gray-700 relative;
 }
 
 .titleContainer {
