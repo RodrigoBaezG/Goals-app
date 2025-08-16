@@ -1,8 +1,15 @@
 @reference "tailwindcss";
 
+
+.tarjeta {
+
+    @apply rounded-xl m-2 text-gray-700 text-xs mx-4 shadow-[10px_10px_20px_#c5c5c5,_-10px_-10px_20px_#ffffff]
+
+}
+
 .mainContainer {
     height: calc(100vh - 88px);
-    @apply flex;
+    @apply flex flex-row overflow-hidden;
 }
 
 .aside{
@@ -11,9 +18,9 @@
 }
 
 .main{
-    @apply w-full h-full overflow-scroll;
+    @apply w-full h-full overflow-scroll bg-gradient-to-tl from-gray-300 to-gray-200;
 }
 
 .icon {
-    @apply h-8 mr-2;
+    @apply h-6 mr-2;
 }

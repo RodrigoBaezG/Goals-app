@@ -2,6 +2,7 @@ import MainCss from './Main.module.css';
 import ListIcon from '../img/ListIcon.svg';
 import NewGoalIcon from '../img/newgoal.svg';
 import Link from './Link';
+import List from './lista/List.jsx';
 
 
 function Main({children}) {

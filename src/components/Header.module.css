@@ -13,7 +13,7 @@
 }
 
 .title {
-    @apply flex uppercase font-semibold text-gray-800;
+    @apply  ml-2 flex uppercase font-semibold text-gray-800;
 }
 
 .icon {
