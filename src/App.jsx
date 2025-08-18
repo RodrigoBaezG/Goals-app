@@ -1,21 +1,21 @@
 import './App.css'
-import Header from './components/Header.jsx';
-import Main from './components/Main.jsx';
-import Footer from './components/Footer.jsx';
+import { Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout.jsx';
 import List from './components/lista/List.jsx';
 import Details from './components/nueva/Details.jsx';
+import NotFound from './components/NotFound.jsx';
 
 function App() {
   return (
-    <div className="App">
-      <Header></Header>
-      <Main>
-        {/* <List></List> */}
-        <Details></Details>
-      </Main>
-      <Footer></Footer>
-    </div>
-  );
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<List />} />
+        <Route path="/list" element={<List />} />
+        <Route path="/create" element={<Details />} />
+      </Route>
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  )
 }
 
 export default App;

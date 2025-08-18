@@ -1,7 +1,7 @@
 import HeaderCss from "./Header.module.css";
 import GoalsAppIcon from '../img/GoalsAppIcon.svg';
 import profileIcon from '../img/profile.svg';
-import Link from "./Link";
+import LinkTo from "./LinkTo";
 
 function Header() {
   return (
@@ -11,9 +11,9 @@ function Header() {
         <a className={HeaderCss.title} href="/goals">Goals app</a>
       </div>
       <nav>
-        <Link href="/profile">
+        <LinkTo to="/profile">
           <img className={HeaderCss.icon} src={profileIcon} />
-        </Link>
+        </LinkTo>
       </nav>
     </header>
   );
