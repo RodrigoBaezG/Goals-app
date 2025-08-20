@@ -14,7 +14,7 @@ function Details() {
         period: 'week',
         icon: '📚',
         goal: 1,
-        deadline: '2023-12-31',
+        deadline: '',
         completed: 0
     });
 
@@ -30,7 +30,7 @@ function Details() {
         const goalMemory = state.objects[id];
         if(!id) return;
         if(!goalMemory){
-            return navigate('/list');
+            return navigate('/404');
         }
         setForm(goalMemory);
         }, [id]);
@@ -49,12 +49,17 @@ function Details() {
     };
 
     const cancel = ()=>{
-        navigate('/list')
+        navigate('/list');
     }
 
     const update = ()=>{
-        dispatch({type: 'update', goal: form})
-        navigate('/list')
+        dispatch({type: 'update', goal: form});
+        navigate('/list');
+    }
+
+    const deleteGoal = ()=>{
+        dispatch({type: 'delete', id});
+        navigate('/list');
     }
 
     return (
@@ -146,6 +151,10 @@ function Details() {
                     className="button button--black"
                     onClick={update}
                 >Update</button>}
+                {id && <button
+                    className="button button--black"
+                    onClick={deleteGoal}
+                >Delete</button>}
                 <button 
                     className="button button--gray"
                     onClick={cancel}

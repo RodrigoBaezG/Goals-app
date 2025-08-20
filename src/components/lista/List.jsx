@@ -8,7 +8,7 @@ import { Outlet } from 'react-router-dom';
 
 function List() {
 
-    const [state, dispatch] = useContext(Context);
+    const [state] = useContext(Context);
 
     return (
         <>
