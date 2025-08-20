@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import DetailsCss from './Details.module.css';
+import { useContext} from 'react';
+import { Context } from '../../services/Memory.jsx';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function Details() {
 
+    const {id} = useParams();
+
     const [form, setForm] = useState({
-        details: 'Aprender React',
+        details: '',
         events: 1,
         period: 'week',
         icon: '📚',
@@ -13,17 +18,43 @@ function Details() {
         completed: 0
     });
 
+    const [state, dispatch] = useContext(Context);
+
     const { details, events, period, icon, goal, deadline, completed } = form;
+
+    const onChange = (e, prop) => {
+        setForm({ ...form, [prop]: e.target.value });
+    };
+
+    useEffect(() => {
+        const goalMemory = state.objects[id];
+        if(!id) return;
+        if(!goalMemory){
+            return navigate('/list');
+        }
+        setForm(goalMemory);
+        }, [id]);
 
     const frecuencyOptions = ['day', 'week', 'month', 'year'];
     const iconOptions = ['📚', '💻', '🎨', '🏋️‍♂️', '💦', '✈️'];
 
-    const onChange = (e, prop) => {
-        setForm({...form, [prop]: e.target.value});
+    const navigate = useNavigate();
+
+    const crear = async () => {
+        dispatch({
+            type: 'create_goal',
+            goal: form
+        });
+        navigate('/list');
     };
 
-    const crear = async ()=> {
-        console.log(form);
+    const cancel = ()=>{
+        navigate('/list')
+    }
+
+    const update = ()=>{
+        dispatch({type: 'update', goal: form})
+        navigate('/list')
     }
 
     return (
@@ -47,15 +78,16 @@ function Details() {
                             className="input mr-6"
                             onChange={(e) => onChange(e, 'events')}
                         />
-                        <select 
-                            value={period} 
+                        <select
+                            value={period}
                             className="input"
                             onChange={(e) => onChange(e, 'period')}
                         >
                             {frecuencyOptions.map(option => (
-                                <option 
-                                value={option}
-                                onChange={(e) => onChange(e, 'option')}
+                                <option
+                                    key={option}
+                                    value={option}
+                                    onChange={(e) => onChange(e, 'option')}
                                 >{option}</option>
                             ))}
                         </select>
@@ -97,8 +129,8 @@ function Details() {
                         onChange={(e) => onChange(e, 'icon')}
                     >
                         {iconOptions.map(icon =>
-                        (<option value={icon}>
-                        {icon}
+                        (<option key={icon} value={icon}>
+                            {icon}
                         </option>
                         ))}
                     </select>
@@ -106,14 +138,21 @@ function Details() {
                 </label>
             </form>
             <div className={DetailsCss.buttons}>
-                <button 
+                {!id && <button
                     className="button button--black"
                     onClick={crear}
-                    >Create</button>
-                <button className="button button--gray">Cancel</button>
+                >Create</button>}
+                {id && <button
+                    className="button button--black"
+                    onClick={update}
+                >Update</button>}
+                <button 
+                    className="button button--gray"
+                    onClick={cancel}
+                >Cancel</button>
             </div>
         </div>
     );
-}
+};
 
 export default Details;

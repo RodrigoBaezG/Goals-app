@@ -1,38 +1,21 @@
+import { useContext } from 'react';
 import Goal from './Goal.jsx';
-
-const listaMock = [
-    {
-    icono: "📚",
-    details: "Learn React",
-    period: "week",
-    events: 4,
-    goal: 10,
-    completed: 3
-    },
-    {
-    icono: "📚",
-    details: "Learn Python",
-    period: "week",
-    events: 5,
-    goal: 20,
-    completed: 5   
-    },
-    {
-    icono: "📚",
-    details: "Learn JavaScript",
-    period: "week",
-    events: 7,
-    goal: 15,
-    completed: 8    
-    }
-    
-];
+import { Context } from '../../services/Memory.jsx';
+import { Outlet } from 'react-router-dom';
 
 
-function List () {
-    return ( 
-            listaMock.map(goal => (<Goal {...goal} />))
-     );
+
+
+function List() {
+
+    const [state, dispatch] = useContext(Context);
+
+    return (
+        <>
+            {state.order.map(id => (<Goal key={id} {...state.objects[id]} />))}
+            <Outlet />
+        </>
+    );
 }
 
-export default List ;
+export default List;
