@@ -5,8 +5,23 @@ import List from './components/lista/List.jsx';
 import Details from './components/nueva/Details.jsx';
 import NotFound from './components/NotFound.jsx';
 import Modal from './components/Modal.jsx';
+import { useContext } from 'react';
+import { Context } from './services/Memory.jsx';
+import { useEffect } from 'react';
+import { RequestGoals } from './services/Request.jsx';
 
 function App() {
+
+  const [, dispatch] = useContext(Context);
+
+  useEffect(() => {
+    async function FetchData() {
+      const goals = await RequestGoals();
+      dispatch({ type: 'add_goal', goals });
+    };
+    FetchData()
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

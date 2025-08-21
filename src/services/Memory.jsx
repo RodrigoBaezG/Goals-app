@@ -34,13 +34,18 @@ const listaMock = [
     }
 ];
 
-const memory = localStorage.getItem('goals');
-const inicialState = memory
-    ? JSON.parse(memory)
-    : {
+// const memory = localStorage.getItem('goals');
+// const inicialState = memory
+//     ? JSON.parse(memory)
+//     : {
+//         order: [],
+//         objects: {}
+//     };
+
+const initialState = {
         order: [],
         objects: {}
-    };
+};
 
 function reducer(state, action) {
     switch (action.type) {
@@ -50,11 +55,11 @@ function reducer(state, action) {
                 order: goals.map(goal => goal.id),
                 objects: goals.reduce((object, goal) => ({ ...object, [goal.id]: goal }), {})
             };
-            localStorage.setItem('goals', JSON.stringify(newState));
+            // localStorage.setItem('goals', JSON.stringify(newState));
             return newState;
         };
         case 'create_goal': {
-            const id = String(Math.random());
+            const id = action.goal.id;            /*String(Math.random());*/
             const newState = {
                 order: [...state.order, id],
                 objects: {
@@ -62,7 +67,7 @@ function reducer(state, action) {
                     [id]: action.goal
                 }
             };
-            localStorage.setItem('goals', JSON.stringify(newState));
+            // localStorage.setItem('goals', JSON.stringify(newState));
             return newState;
         };
         case 'update': {
@@ -72,7 +77,7 @@ function reducer(state, action) {
                 ...action.goal
             };
             const newState = { ...state };
-            localStorage.setItem('goals', JSON.stringify(newState));
+            // localStorage.setItem('goals', JSON.stringify(newState));
             return newState;
         };
         case 'delete': {
@@ -83,7 +88,8 @@ function reducer(state, action) {
                 order: newOrder,
                 objects: state.objects
             };
-            localStorage.setItem('goals', JSON.stringify(newState));
+            console.log(state);
+            // localStorage.setItem('goals', JSON.stringify(newState));
             return newState;
         };
         default:
@@ -100,7 +106,7 @@ export const Context = createContext(null);
 
 function Memory({ children }) {
 
-    const [state, dispatch] = useReducer(reducer, inicialState);
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     return (
         <Context.Provider value={[state, dispatch]}>

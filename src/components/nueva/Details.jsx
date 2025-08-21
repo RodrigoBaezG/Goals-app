@@ -3,6 +3,7 @@ import DetailsCss from './Details.module.css';
 import { useContext} from 'react';
 import { Context } from '../../services/Memory.jsx';
 import { useNavigate, useParams } from 'react-router-dom';
+import { CreateGoal, DeleteGoal, UpdateGoal } from '../../services/Request.jsx';
 
 function Details() {
 
@@ -41,9 +42,10 @@ function Details() {
     const navigate = useNavigate();
 
     const crear = async () => {
+        const newGoal = await CreateGoal(); 
         dispatch({
             type: 'create_goal',
-            goal: form
+            goal: newGoal
         });
         navigate('/list');
     };
@@ -52,13 +54,15 @@ function Details() {
         navigate('/list');
     }
 
-    const update = ()=>{
-        dispatch({type: 'update', goal: form});
+    const update = async () => {
+        const updatedGoal = await UpdateGoal();
+        dispatch({type: 'update', goal: updatedGoal});
         navigate('/list');
     }
 
-    const deleteGoal = ()=>{
-        dispatch({type: 'delete', id});
+    const deleteGoal = async () => {
+        const deletedId = await DeleteGoal();
+        dispatch({type: 'delete', id: deletedId});
         navigate('/list');
     }
 
@@ -152,7 +156,7 @@ function Details() {
                     onClick={update}
                 >Update</button>}
                 {id && <button
-                    className="button button--black"
+                    className="button button--red"
                     onClick={deleteGoal}
                 >Delete</button>}
                 <button 

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Goal from './Goal.jsx';
 import { Context } from '../../services/Memory.jsx';
 import { Outlet } from 'react-router-dom';
