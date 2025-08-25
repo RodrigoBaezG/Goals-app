@@ -12,34 +12,34 @@ import { RequestGoals } from './services/Request.jsx';
 
 function App() {
 
-  const [, dispatch] = useContext(Context);
+    const [, dispatch] = useContext(Context);
 
-  useEffect(() => {
-    async function FetchData() {
-      const goals = await RequestGoals();
-      dispatch({ type: 'add_goal', goals });
-    };
-    FetchData()
-  }, []);
+    useEffect(() => {
+        async function FetchData() {
+            const goals = await RequestGoals();
+            dispatch({ type: 'add_goal', goals });
+        };
+        FetchData()
+    }, []);
 
-  return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<List />} />
-        <Route path="/list" element={<List />}>
-          <Route path='/list/:id'
-            element={
-              <Modal>
-                <Details />
-              </Modal>
-            } />
-        </Route>
-        <Route path="/create" element={<Details />} />
-        <Route path="*" element={<NotFound />} />
+    return (
+        <Routes>
+            <Route path="/" element={<Layout />}>
+                <Route index element={<List />} />
+                <Route path="/list" element={<List />}>
+                    <Route path='/list/:id'
+                        element={
+                            <Modal>
+                                <Details />
+                            </Modal>
+                        } />
+                </Route>
+                <Route path="/create" element={<Details />} />
+                <Route path="*" element={<NotFound />} />
 
-      </Route>
-    </Routes>
-  )
+            </Route>
+        </Routes>
+    )
 }
 
 export default App;
