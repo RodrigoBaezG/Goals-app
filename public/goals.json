@@ -6,7 +6,7 @@
         "period": "week",
         "events": 4,
         "goal": 10,
-        "deadline":"",
+        "deadline": "",
         "completed": 3
     },
     {
@@ -16,7 +16,7 @@
         "period": "week",
         "events": 4,
         "goal": 10,
-        "deadline":"",
+        "deadline": "",
         "completed": 3
     },
     {
@@ -26,7 +26,7 @@
         "period": "week",
         "events": 4,
         "goal": 10,
-        "deadline":"",
+        "deadline": "",
         "completed": 3
     }
 ]

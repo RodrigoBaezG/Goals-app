@@ -1,11 +1,7 @@
 @reference "tailwindcss";
 
-
-
 .header {
-
     @apply h-14 flex justify-between items-center shadow bg-white text-gray-700 relative;
-
 }
 
 .titleContainer {
@@ -13,7 +9,7 @@
 }
 
 .title {
-    @apply  ml-2 flex uppercase font-semibold text-gray-800;
+    @apply ml-2 flex uppercase font-semibold text-gray-800;
 }
 
 .icon {

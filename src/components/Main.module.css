@@ -1,10 +1,7 @@
 @reference "tailwindcss";
 
-
 .tarjeta {
-
-    @apply rounded-xl m-2 text-gray-700 text-xs mx-4 shadow-[10px_10px_20px_#c5c5c5,_-10px_-10px_20px_#ffffff]
-
+    @apply rounded-xl m-2 text-gray-700 text-xs mx-4 shadow-[10px_10px_20px_#c5c5c5,_-10px_-10px_20px_#ffffff];
 }
 
 .mainContainer {
@@ -12,12 +9,11 @@
     @apply flex flex-row overflow-hidden;
 }
 
-.aside{
+.aside {
     @apply flex flex-col text-gray-700 bg-gray-100 shadow w-60 h-full pt-2;
-
 }
 
-.main{
+.main {
     @apply w-full h-full overflow-scroll bg-gradient-to-tl from-gray-300 to-gray-200;
 }
 

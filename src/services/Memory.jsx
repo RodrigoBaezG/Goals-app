@@ -1,6 +1,5 @@
 import { createContext, useReducer } from "react";
 
-
 const listaMock = [
     {
         id: 1,
@@ -9,8 +8,8 @@ const listaMock = [
         period: "week",
         events: 4,
         goal: 10,
-        deadline:'',
-        completed: 3
+        deadline: "",
+        completed: 3,
     },
     {
         id: 2,
@@ -19,8 +18,8 @@ const listaMock = [
         period: "week",
         events: 5,
         goal: 20,
-        deadline:'',
-        completed: 5
+        deadline: "",
+        completed: 5,
     },
     {
         id: 3,
@@ -29,9 +28,9 @@ const listaMock = [
         period: "week",
         events: 7,
         goal: 15,
-        deadline:'',
-        completed: 8
-    }
+        deadline: "",
+        completed: 8,
+    },
 ];
 
 // const memory = localStorage.getItem('goals');
@@ -43,69 +42,70 @@ const listaMock = [
 //     };
 
 const initialState = {
-        order: [],
-        objects: {}
+    order: [],
+    objects: {},
 };
 
 function reducer(state, action) {
     switch (action.type) {
-        case 'add_goal': {
+        case "add_goal": {
             const goals = action.goals;
             const newState = {
-                order: goals.map(goal => goal.id),
-                objects: goals.reduce((object, goal) => ({ ...object, [goal.id]: goal }), {})
+                order: goals.map((goal) => goal.id),
+                objects: goals.reduce(
+                    (object, goal) => ({ ...object, [goal.id]: goal }),
+                    {},
+                ),
             };
             // localStorage.setItem('goals', JSON.stringify(newState));
             return newState;
-        };
-        case 'create_goal': {
-            const id = action.goal.id;            /*String(Math.random());*/
+        }
+        case "create_goal": {
+            const id = action.goal.id; /*String(Math.random());*/
             const newState = {
                 order: [...state.order, id],
                 objects: {
                     ...state.objects,
-                    [id]: action.goal
-                }
+                    [id]: action.goal,
+                },
             };
             // localStorage.setItem('goals', JSON.stringify(newState));
             return newState;
-        };
-        case 'update': {
+        }
+        case "update": {
             const id = action.goal.id;
             state.objects[id] = {
                 ...state.objects[id],
-                ...action.goal
+                ...action.goal,
             };
             const newState = { ...state };
             // localStorage.setItem('goals', JSON.stringify(newState));
             return newState;
-        };
-        case 'delete': {
+        }
+        case "delete": {
             const id = action.id;
-            const newOrder = state.order.filter(item => item !== id);
+            const newOrder = state.order.filter((item) => item !== id);
             delete state.objects[id];
             const newState = {
                 order: newOrder,
-                objects: state.objects
+                objects: state.objects,
             };
             console.log(state);
             // localStorage.setItem('goals', JSON.stringify(newState));
             return newState;
-        };
+        }
         default:
             throw new Error();
-    };
-};
+    }
+}
 
 // reducer(inicialState, { type: 'add_goal', goals: listaMock });
-
 
 // console.log(reducer(inicialState, { type: 'add_goal', goals: listaMock }));
 
 export const Context = createContext(null);
 
 function Memory({ children }) {
-
     const [state, dispatch] = useReducer(reducer, initialState);
 
     return (

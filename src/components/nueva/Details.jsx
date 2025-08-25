@@ -1,22 +1,21 @@
-import React, { use, useEffect, useState } from 'react';
-import DetailsCss from './Details.module.css';
-import { useContext} from 'react';
-import { Context } from '../../services/Memory.jsx';
-import { useNavigate, useParams } from 'react-router-dom';
-import { CreateGoal, DeleteGoal, UpdateGoal } from '../../services/Request.jsx';
+import React, { use, useEffect, useState } from "react";
+import DetailsCss from "./Details.module.css";
+import { useContext } from "react";
+import { Context } from "../../services/Memory.jsx";
+import { useNavigate, useParams } from "react-router-dom";
+import { CreateGoal, DeleteGoal, UpdateGoal } from "../../services/Request.jsx";
 
 function Details() {
-
-    const {id} = useParams();
+    const { id } = useParams();
 
     const [form, setForm] = useState({
-        details: '',
+        details: "",
         events: 1,
-        period: 'week',
-        icon: '📚',
+        period: "week",
+        icon: "📚",
         goal: 1,
-        deadline: '',
-        completed: 0
+        deadline: "",
+        completed: 0,
     });
 
     const [state, dispatch] = useContext(Context);
@@ -29,42 +28,42 @@ function Details() {
 
     useEffect(() => {
         const goalMemory = state.objects[id];
-        if(!id) return;
-        if(!goalMemory){
-            return navigate('/404');
+        if (!id) return;
+        if (!goalMemory) {
+            return navigate("/404");
         }
         setForm(goalMemory);
-        }, [id]);
+    }, [id]);
 
-    const frecuencyOptions = ['day', 'week', 'month', 'year'];
-    const iconOptions = ['📚', '💻', '🎨', '🏋️‍♂️', '💦', '✈️'];
+    const frecuencyOptions = ["day", "week", "month", "year"];
+    const iconOptions = ["📚", "💻", "🎨", "🏋️‍♂️", "💦", "✈️"];
 
     const navigate = useNavigate();
 
     const crear = async () => {
-        const newGoal = await CreateGoal(); 
+        const newGoal = await CreateGoal();
         dispatch({
-            type: 'create_goal',
-            goal: newGoal
+            type: "create_goal",
+            goal: newGoal,
         });
-        navigate('/list');
+        navigate("/list");
     };
 
-    const cancel = ()=>{
-        navigate('/list');
-    }
+    const cancel = () => {
+        navigate("/list");
+    };
 
     const update = async () => {
         const updatedGoal = await UpdateGoal();
-        dispatch({type: 'update', goal: updatedGoal});
-        navigate('/list');
-    }
+        dispatch({ type: "update", goal: updatedGoal });
+        navigate("/list");
+    };
 
     const deleteGoal = async () => {
         const deletedId = await DeleteGoal();
-        dispatch({type: 'delete', id: deletedId});
-        navigate('/list');
-    }
+        dispatch({ type: "delete", id: deletedId });
+        navigate("/list");
+    };
 
     return (
         <div className="tarjeta">
@@ -75,7 +74,7 @@ function Details() {
                         value={details}
                         type="text"
                         className="input"
-                        onChange={(e) => onChange(e, 'details')}
+                        onChange={(e) => onChange(e, "details")}
                     />
                 </label>
                 <label className="label">
@@ -85,19 +84,21 @@ function Details() {
                             value={events}
                             type="text"
                             className="input mr-6"
-                            onChange={(e) => onChange(e, 'events')}
+                            onChange={(e) => onChange(e, "events")}
                         />
                         <select
                             value={period}
                             className="input"
-                            onChange={(e) => onChange(e, 'period')}
+                            onChange={(e) => onChange(e, "period")}
                         >
-                            {frecuencyOptions.map(option => (
+                            {frecuencyOptions.map((option) => (
                                 <option
                                     key={option}
                                     value={option}
-                                    onChange={(e) => onChange(e, 'option')}
-                                >{option}</option>
+                                    onChange={(e) => onChange(e, "option")}
+                                >
+                                    {option}
+                                </option>
                             ))}
                         </select>
                     </div>
@@ -108,7 +109,7 @@ function Details() {
                         value={deadline}
                         type="date"
                         className="input"
-                        onChange={(e) => onChange(e, 'deadline')}
+                        onChange={(e) => onChange(e, "deadline")}
                     />
                 </label>
                 <label className="label">
@@ -118,7 +119,7 @@ function Details() {
                         value={completed}
                         type="number"
                         min={0}
-                        onChange={(e) => onChange(e, 'completed')}
+                        onChange={(e) => onChange(e, "completed")}
                     />
                 </label>
                 <label className="label">
@@ -128,44 +129,46 @@ function Details() {
                         type="number"
                         min={0}
                         className="input"
-                        onChange={(e) => onChange(e, 'goal')}
+                        onChange={(e) => onChange(e, "goal")}
                     />
                 </label>
                 <label className="label">
                     Choose an icon for your goal
-                    <select value={icon}
+                    <select
+                        value={icon}
                         className="input"
-                        onChange={(e) => onChange(e, 'icon')}
+                        onChange={(e) => onChange(e, "icon")}
                     >
-                        {iconOptions.map(icon =>
-                        (<option key={icon} value={icon}>
-                            {icon}
-                        </option>
+                        {iconOptions.map((icon) => (
+                            <option key={icon} value={icon}>
+                                {icon}
+                            </option>
                         ))}
                     </select>
-
                 </label>
             </form>
             <div className={DetailsCss.buttons}>
-                {!id && <button
-                    className="button button--black"
-                    onClick={crear}
-                >Create</button>}
-                {id && <button
-                    className="button button--black"
-                    onClick={update}
-                >Update</button>}
-                {id && <button
-                    className="button button--red"
-                    onClick={deleteGoal}
-                >Delete</button>}
-                <button 
-                    className="button button--gray"
-                    onClick={cancel}
-                >Cancel</button>
+                {!id && (
+                    <button className="button button--black" onClick={crear}>
+                        Create
+                    </button>
+                )}
+                {id && (
+                    <button className="button button--black" onClick={update}>
+                        Update
+                    </button>
+                )}
+                {id && (
+                    <button className="button button--red" onClick={deleteGoal}>
+                        Delete
+                    </button>
+                )}
+                <button className="button button--gray" onClick={cancel}>
+                    Cancel
+                </button>
             </div>
         </div>
     );
-};
+}
 
 export default Details;
