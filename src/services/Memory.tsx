@@ -1,37 +1,40 @@
-import { createContext, useReducer } from "react";
+import { useReducer } from "react";
+import { Context } from "./Context.tsx";
+import type { GoalType } from "../types/Goal.ts";
+import type { ReactNode } from "react";
 
-const listaMock = [
-    {
-        id: 1,
-        icon: "📚",
-        details: "Learn React",
-        period: "week",
-        events: 4,
-        goal: 10,
-        deadline: "",
-        completed: 3,
-    },
-    {
-        id: 2,
-        icon: "📚",
-        details: "Learn Python",
-        period: "week",
-        events: 5,
-        goal: 20,
-        deadline: "",
-        completed: 5,
-    },
-    {
-        id: 3,
-        icon: "📚",
-        details: "Learn JavaScript",
-        period: "week",
-        events: 7,
-        goal: 15,
-        deadline: "",
-        completed: 8,
-    },
-];
+// const listaMock = [
+//     {
+//         id: 1,
+//         icon: "📚",
+//         details: "Learn React",
+//         period: "week",
+//         events: 4,
+//         goal: 10,
+//         deadline: "",
+//         completed: 3,
+//     },
+//     {
+//         id: 2,
+//         icon: "📚",
+//         details: "Learn Python",
+//         period: "week",
+//         events: 5,
+//         goal: 20,
+//         deadline: "",
+//         completed: 5,
+//     },
+//     {
+//         id: 3,
+//         icon: "📚",
+//         details: "Learn JavaScript",
+//         period: "week",
+//         events: 7,
+//         goal: 15,
+//         deadline: "",
+//         completed: 8,
+//     },
+// ];
 
 // const memory = localStorage.getItem('goals');
 // const inicialState = memory
@@ -41,12 +44,23 @@ const listaMock = [
 //         objects: {}
 //     };
 
-const initialState = {
+type StateType = {
+    order: Array<string | number>;
+    objects: { [id: string]: GoalType };
+};
+
+type Action =
+    | { type: "add_goal"; goals: GoalType[] }
+    | { type: "create_goal"; goal: GoalType }
+    | { type: "update"; goal: Partial<GoalType> & { id: string | number } }
+    | { type: "delete"; id: string | number };
+
+const initialState: StateType = {
     order: [],
     objects: {},
 };
 
-function reducer(state, action) {
+function reducer(state: StateType, action: Action): StateType {
     switch (action.type) {
         case "add_goal": {
             const goals = action.goals;
@@ -74,21 +88,28 @@ function reducer(state, action) {
         }
         case "update": {
             const id = action.goal.id;
-            state.objects[id] = {
-                ...state.objects[id],
-                ...action.goal,
+            const newObjects = {
+                ...state.objects,
+                [id]: {
+                    ...state.objects[id],
+                    ...action.goal,
+                } as GoalType,
             };
-            const newState = { ...state };
+            const newState = {
+                ...state,
+                objects: newObjects,
+            };
             // localStorage.setItem('goals', JSON.stringify(newState));
             return newState;
         }
         case "delete": {
             const id = action.id;
             const newOrder = state.order.filter((item) => item !== id);
-            delete state.objects[id];
+            const newObjects = { ...state.objects };
+            delete newObjects[id];
             const newState = {
                 order: newOrder,
-                objects: state.objects,
+                objects: newObjects,
             };
             console.log(state);
             // localStorage.setItem('goals', JSON.stringify(newState));
@@ -103,9 +124,11 @@ function reducer(state, action) {
 
 // console.log(reducer(inicialState, { type: 'add_goal', goals: listaMock }));
 
-export const Context = createContext(null);
+interface MemoryProps {
+    children: ReactNode;
+}
 
-function Memory({ children }) {
+function Memory({ children }: MemoryProps) {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     return (

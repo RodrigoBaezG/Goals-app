@@ -1,10 +1,10 @@
-import { useContext, useEffect } from "react";
-import Goal from "./Goal.jsx";
-import { Context } from "../../services/Memory.jsx";
+import { useContext } from "react";
+import Goal from "./Goal.js";
+import { Context } from "../../../services/Context.js";
 import { Outlet } from "react-router-dom";
 
 function List() {
-    const [state] = useContext(Context);
+    const [state]  = useContext(Context);
 
     return (
         <>

@@ -1,9 +1,9 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import DetailsCss from "./Details.module.css";
 import { useContext } from "react";
-import { Context } from "../../services/Memory.jsx";
+import { Context } from "../../../services/Context.tsx";
 import { useNavigate, useParams } from "react-router-dom";
-import { CreateGoal, DeleteGoal, UpdateGoal } from "../../services/Request.jsx";
+import { CreateGoal, DeleteGoal, UpdateGoal } from "../../../services/Request.ts";
 
 function Details() {
     const { id } = useParams();
@@ -60,13 +60,14 @@ function Details() {
     };
 
     const deleteGoal = async () => {
-        const deletedId = await DeleteGoal();
+        const deletedId = form.id;
+        await DeleteGoal(deletedId);
         dispatch({ type: "delete", id: deletedId });
         navigate("/list");
     };
 
     return (
-        <div className="tarjeta">
+        <div className="card">
             <form action="" className="p-4">
                 <label className="label">
                     Describe your goal

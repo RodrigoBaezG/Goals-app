@@ -1,8 +1,7 @@
 import MainCss from "./Main.module.css";
-import ListIcon from "../img/ListIcon.svg";
-import NewGoalIcon from "../img/newgoal.svg";
+import ListIcon from "../../img/ListIcon.svg";
+import NewGoalIcon from "../../img/newgoal.svg";
 import LinkTo from "./LinkTo.jsx";
-import List from "./lista/List.jsx";
 
 function Main({ children }) {
     return (
