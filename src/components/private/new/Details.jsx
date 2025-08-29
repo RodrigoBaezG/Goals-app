@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DetailsCss from "./Details.module.css";
 import { useContext } from "react";
-import { Context } from "../../../services/Context.tsx";
+import { GoalsContext } from "../../../memory/Context.tsx";
 import { useNavigate, useParams } from "react-router-dom";
 import { CreateGoal, DeleteGoal, UpdateGoal } from "../../../services/Request.ts";
 
@@ -18,7 +18,7 @@ function Details() {
         completed: 0,
     });
 
-    const [state, dispatch] = useContext(Context);
+    const [state, dispatch] = useContext(GoalsContext);
 
     const { details, events, period, icon, goal, deadline, completed } = form;
 
@@ -67,106 +67,104 @@ function Details() {
     };
 
     return (
-        <div className="card">
-            <form action="" className="p-4">
-                <label className="label">
-                    Describe your goal
-                    <input
-                        value={details}
-                        type="text"
-                        className="input"
-                        onChange={(e) => onChange(e, "details")}
-                    />
-                </label>
-                <label className="label">
-                    How often do you want to achieve this goal?
-                    <div className="flex">
+        <div className="flex justify-center items-center">
+            <div className={'card ' + DetailsCss.details}>
+                <form className="p-4">
+                    <label className="label">
+                        Details
                         <input
-                            value={events}
+                            className="input"
                             type="text"
-                            className="input mr-6"
-                            onChange={(e) => onChange(e, "events")}
+                            placeholder="Type your new goal"
+                            value={details}
+                            onChange={(e) => onChange(e, "details")}
                         />
+                    </label>
+                    <label className="label">
+                        Deadline
+                        <input
+                            className="input"
+                            type="date"
+                            value={deadline}
+                            onChange={(e) => onChange(e, "deadline")}
+                        />
+                    </label>
+                    <label className="label">
+                        Frecuency
                         <select
                             value={period}
                             className="input"
                             onChange={(e) => onChange(e, "period")}
                         >
-                            {frecuencyOptions.map((option) => (
-                                <option
-                                    key={option}
-                                    value={option}
-                                    onChange={(e) => onChange(e, "option")}
-                                >
-                                    {option}
+                            {frecuencyOptions.map((period) => (
+                                <option key={period} value={period}>
+                                    {period}
                                 </option>
                             ))}
                         </select>
-                    </div>
-                </label>
-                <label className="label">
-                    Do you have a deadline?
-                    <input
-                        value={deadline}
-                        type="date"
-                        className="input"
-                        onChange={(e) => onChange(e, "deadline")}
-                    />
-                </label>
-                <label className="label">
-                    How many times have you achieved this goal?
-                    <input
-                        className="input"
-                        value={completed}
-                        type="number"
-                        min={0}
-                        onChange={(e) => onChange(e, "completed")}
-                    />
-                </label>
-                <label className="label">
-                    How many times do you want to achieve this goal?
-                    <input
-                        value={goal}
-                        type="number"
-                        min={0}
-                        className="input"
-                        onChange={(e) => onChange(e, "goal")}
-                    />
-                </label>
-                <label className="label">
-                    Choose an icon for your goal
-                    <select
-                        value={icon}
-                        className="input"
-                        onChange={(e) => onChange(e, "icon")}
-                    >
-                        {iconOptions.map((icon) => (
-                            <option key={icon} value={icon}>
-                                {icon}
-                            </option>
-                        ))}
-                    </select>
-                </label>
-            </form>
-            <div className={DetailsCss.buttons}>
-                {!id && (
-                    <button className="button button--black" onClick={crear}>
-                        Create
+                    </label>
+                    <label className="label">
+                        Events
+                        <input
+                            className="input"
+                            type="number"
+                            value={events}
+                            onChange={(e) => onChange(e, "events")}
+                        />
+                    </label>
+                    <label className="label">
+                        Goal
+                        <input
+                            className="input"
+                            type="number"
+                            value={goal}
+                            onChange={(e) => onChange(e, "goal")}
+                        />
+                    </label>
+                    <label className="label">
+                        Completed
+                        <input
+                            className="input"
+                            type="number"
+                            value={completed}
+                            onChange={(e) => onChange(e, "completed")}
+                        />
+                    </label>
+                    <label className="label">
+                        Choose an icon for your goal
+                        <select
+                            value={icon}
+                            className="input"
+                            onChange={(e) => onChange(e, "icon")}
+                        >
+                            {iconOptions.map((icon) => (
+                                <option key={icon} value={icon}>
+                                    {icon}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
+                </form>
+                <div className={DetailsCss.buttons}>
+                    {!id && (
+                        <button className="button button--black" onClick={crear}>
+                            Create
+                        </button>
+                    )}
+                    {id && (
+                        <button className="button button--black" onClick={update}>
+                            Update
+                        </button>
+                    )}
+                    {id && (
+                        <button className="button button--red" onClick={deleteGoal}>
+                            Delete
+                        </button>
+                    )}
+                    <button className="button button--gray" onClick={cancel}>
+                        Cancel
                     </button>
-                )}
-                {id && (
-                    <button className="button button--black" onClick={update}>
-                        Update
-                    </button>
-                )}
-                {id && (
-                    <button className="button button--red" onClick={deleteGoal}>
-                        Delete
-                    </button>
-                )}
-                <button className="button button--gray" onClick={cancel}>
-                    Cancel
-                </button>
+                </div>
             </div>
         </div>
     );

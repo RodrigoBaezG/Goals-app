@@ -2,7 +2,8 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
-import Memory from "./services/Memory.tsx";
+import GoalsMemory from "./memory/Goals.tsx";
+import AuthMemory from "./memory/Auth.jsx";
 
 const rootElement = document.getElementById("root");
 
@@ -10,11 +11,13 @@ const rootElement = document.getElementById("root");
 if (rootElement) {
     createRoot(rootElement).render(
         <StrictMode>
-            <Memory>
+            <AuthMemory>
+            <GoalsMemory>
                 <BrowserRouter>
                     <App />
                 </BrowserRouter>
-            </Memory>
+            </GoalsMemory>
+            </AuthMemory>
         </StrictMode>,
     );
 } else {

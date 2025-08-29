@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { Context } from "./Context.tsx";
+import { GoalsContext } from "./Context.tsx";
 import type { GoalType } from "../types/Goal.ts";
 import type { ReactNode } from "react";
 
@@ -128,14 +128,14 @@ interface MemoryProps {
     children: ReactNode;
 }
 
-function Memory({ children }: MemoryProps) {
-    const [state, dispatch] = useReducer(reducer, initialState);
+function GoalsMemory({ children }: MemoryProps) {
+    const value = useReducer(reducer, initialState);
 
     return (
-        <Context.Provider value={[state, dispatch]}>
+        <GoalsContext.Provider value={value}>
             {children}
-        </Context.Provider>
+        </GoalsContext.Provider>
     );
 }
 
-export default Memory;
+export default GoalsMemory;

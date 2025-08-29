@@ -8,7 +8,7 @@ interface GoalProps extends GoalType {}
 
 function Goal({ id, icon, details, period, events, goal, completed }: GoalProps) {
     return (
-        <Link to={`/list/${id}`} className={styles.goal + "card"}>
+        <Link to={`/list/${id}`} className={styles.goal + " card"}>
             <div className="flex items-center justify-center">
                 <div className={styles.icon}>{icon}</div>
                 <p className={styles.frecuency}>

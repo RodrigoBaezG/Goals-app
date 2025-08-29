@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import Goal from "./Goal.js";
-import { Context } from "../../../services/Context.js";
+import { GoalsContext } from "../../../memory/Context.tsx";
 import { Outlet } from "react-router-dom";
 
 function List() {
-    const [state]  = useContext(Context);
+    const [state]  = useContext(GoalsContext);
 
     return (
         <>
