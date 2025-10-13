@@ -8,21 +8,35 @@ import Modal from "./components/shared/Modal.jsx";
 import { useContext } from "react";
 import { GoalsContext } from "./memory/Context.tsx";
 import { useEffect } from "react";
-import { RequestGoals } from "./services/Request.ts";
+import { RequestGoals } from "./services/Goals.ts";
 import Access from "./components/public/access/Access.jsx";
 import Register from "./components/public/register/Register.jsx";
 import Authenticate from "./components/shared/Authenticate.jsx";
+import { AuthContext } from "./memory/Context.tsx";
 
 function App() {
+
     const [, dispatch] = useContext(GoalsContext);
+    const [authState] = useContext(AuthContext);
+    const { token } = authState;
 
     useEffect(() => {
+         if (!token || token.length === 0) {
+            console.log("Token no válido o vacío. Omite la carga de metas.");
+            return;
+        }
+        
+        console.log("Token válido encontrado. Cargando metas...");
+        console.log("Token changed");
+
         async function FetchData() {
-            const goals = await RequestGoals();
+            const goals = await RequestGoals(token);
             dispatch({ type: "add_goal", goals });
         }
         FetchData();
-    }, [dispatch]);
+    }, [dispatch, token]);
+
+    
 
     return (
         <Routes>

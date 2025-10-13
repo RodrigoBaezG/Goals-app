@@ -3,6 +3,7 @@ import { GoalsContext } from "./Context.tsx";
 import type { GoalType } from "../types/Goal.ts";
 import type { ReactNode } from "react";
 
+
 // const listaMock = [
 //     {
 //         id: 1,
@@ -53,16 +54,25 @@ type Action =
     | { type: "add_goal"; goals: GoalType[] }
     | { type: "create_goal"; goal: GoalType }
     | { type: "update"; goal: Partial<GoalType> & { id: string | number } }
-    | { type: "delete"; id: string | number };
+    | { type: "delete"; id: string | number }
+    
 
 const initialState: StateType = {
     order: [],
     objects: {},
 };
 
+
+
 function reducer(state: StateType, action: Action): StateType {
     switch (action.type) {
         case "add_goal": {
+            // if (!action.goals || !Array.isArray(action.goals)) {
+            //     // Esto maneja si el backend devuelve datos nulos/vacíos
+            //     console.warn("Goals data is missing or invalid for 'add_goal'. Returning current state.");
+            //     return state; 
+            // }
+
             const goals = action.goals;
             const newState = {
                 order: goals.map((goal) => goal.id),
@@ -116,7 +126,7 @@ function reducer(state: StateType, action: Action): StateType {
             return newState;
         }
         default:
-            throw new Error();
+            return state;
     }
 }
 

@@ -6,14 +6,14 @@ import type { GoalType } from "../../../types/Goal.ts";
 interface GoalProps extends GoalType {}
 
 
-function Goal({ id, icon, details, period, events, goal, completed }: GoalProps) {
+function Goal({ id, icon, details, period_, events, goal, completed }: GoalProps) {
     return (
         <Link to={`/list/${id}`} className={styles.goal + " card"}>
             <div className="flex items-center justify-center">
                 <div className={styles.icon}>{icon}</div>
                 <p className={styles.frecuency}>
                     {events}
-                    <sub className="text-xs flex ml-2">/{period}</sub>
+                    <sub className="text-xs flex ml-2">/{period_}</sub>
                 </p>
                 <p>{details}</p>
             </div>

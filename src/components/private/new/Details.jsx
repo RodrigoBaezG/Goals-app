@@ -3,7 +3,7 @@ import DetailsCss from "./Details.module.css";
 import { useContext } from "react";
 import { GoalsContext } from "../../../memory/Context.tsx";
 import { useNavigate, useParams } from "react-router-dom";
-import { CreateGoal, DeleteGoal, UpdateGoal } from "../../../services/Request.ts";
+import { CreateGoal, DeleteGoal, UpdateGoal } from "../../../services/Goals.ts";
 
 function Details() {
     const { id } = useParams();
@@ -11,7 +11,7 @@ function Details() {
     const [form, setForm] = useState({
         details: "",
         events: 1,
-        period: "week",
+        period_: "week",
         icon: "📚",
         goal: 1,
         deadline: "",
@@ -20,7 +20,7 @@ function Details() {
 
     const [state, dispatch] = useContext(GoalsContext);
 
-    const { details, events, period, icon, goal, deadline, completed } = form;
+    const { details, events, period_, icon, goal, deadline, completed } = form;
 
     const onChange = (e, prop) => {
         setForm({ ...form, [prop]: e.target.value });
@@ -41,7 +41,7 @@ function Details() {
     const navigate = useNavigate();
 
     const crear = async () => {
-        const newGoal = await CreateGoal();
+        const newGoal = await CreateGoal(form);
         dispatch({
             type: "create_goal",
             goal: newGoal,
@@ -54,15 +54,14 @@ function Details() {
     };
 
     const update = async () => {
-        const updatedGoal = await UpdateGoal();
+        const updatedGoal = await UpdateGoal(form);
         dispatch({ type: "update", goal: updatedGoal });
         navigate("/list");
     };
 
     const deleteGoal = async () => {
-        const deletedId = form.id;
-        await DeleteGoal(deletedId);
-        dispatch({ type: "delete", id: deletedId });
+        await DeleteGoal(form.id);
+        dispatch({ type: "delete", id: form.id });
         navigate("/list");
     };
 
@@ -92,9 +91,9 @@ function Details() {
                     <label className="label">
                         Frecuency
                         <select
-                            value={period}
+                            value={period_}
                             className="input"
-                            onChange={(e) => onChange(e, "period")}
+                            onChange={(e) => onChange(e, "period_")}
                         >
                             {frecuencyOptions.map((period) => (
                                 <option key={period} value={period}>

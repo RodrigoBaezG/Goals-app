@@ -11,11 +11,11 @@ interface CredentialsProps {
 
 function Credentials({send, title, button}: CredentialsProps) {
     const [form, setForm] = useState({
-        user: "",
+        username: "",
         password: "",
     });
 
-    const { user, password} = form;
+    const { username, password} = form;
 
     const onChange = (event: ChangeEvent, prop: string) => {
         const value = (event.target as HTMLInputElement).value;
@@ -37,8 +37,8 @@ function Credentials({send, title, button}: CredentialsProps) {
                     <input
                         className="input"
                         placeholder="Type your email"
-                        value={user}
-                        onChange={(e) => onChange(e, "user")}
+                        value={username}
+                        onChange={(e) => onChange(e, "username")}
                     />
                 </label>
                 <label className="label">Password

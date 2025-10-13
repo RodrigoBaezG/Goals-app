@@ -9,15 +9,18 @@ const InitialState = {
 function reducer(state, action) {
     switch (action.type) {
         case "add": {
+            console.log("Adding token", action.token);
+            const jwtString = action.token.token; 
             const newState = {
-                token: action.token,
+                token: jwtString,
                 authenticate: true
             };
+            console.log("New state", newState);
             return newState;
         };
 
         default:
-            throw new Error();
+            return state;
     };
 };
 
