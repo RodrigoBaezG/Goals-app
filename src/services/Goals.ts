@@ -1,10 +1,11 @@
 import type { GoalType } from "../types/Goal.ts";
+import API_BASE_URL from '../config.js';
 
 export async function RequestGoals(token: string) : Promise<GoalType[]> {
     if (!token) {
         throw new Error("Authentication token is required.");
     }
-    const response = await fetch("/api/goals", {
+    const response = await fetch(`${API_BASE_URL}/api/goals`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`, // <-- CLAVE: Envío del JWT
@@ -16,13 +17,13 @@ export async function RequestGoals(token: string) : Promise<GoalType[]> {
 }
 
 export async function RequestGoal(id: number): Promise<GoalType> {
-    const response = await fetch(`/api/goals/${id}`);
+    const response = await fetch(`${API_BASE_URL}/api/goals/${id}`);
     const goal: GoalType = await response.json();
     return goal;
 }
 
 export async function CreateGoal(goal: GoalType): Promise<GoalType> {
-    const response = await fetch("/api/goals", {
+    const response = await fetch(`${API_BASE_URL}/api/goals`, {
         method: "POST",
         body: JSON.stringify(goal),
         headers: {
@@ -42,7 +43,7 @@ export async function CreateGoal(goal: GoalType): Promise<GoalType> {
 }
 
 export async function UpdateGoal(goal: GoalType): Promise<GoalType> {
-    const response = await fetch(`/api/goals/${goal.id}`, {
+    const response = await fetch(`${API_BASE_URL}/api/goals/${goal.id}`, {
         method: "PUT",
         body: JSON.stringify(goal),
         headers: {
@@ -55,7 +56,7 @@ export async function UpdateGoal(goal: GoalType): Promise<GoalType> {
 }
 
 export async function DeleteGoal(id: number): Promise<void> {
-    const response = await fetch(`/api/goals/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/api/goals/${id}`, {
         method: "DELETE"
     }
     );
