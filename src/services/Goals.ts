@@ -10,7 +10,8 @@ export async function RequestGoals(token: string) : Promise<GoalType[]> {
         headers: {
             'Authorization': `Bearer ${token}`, // <-- CLAVE: Envío del JWT
             'Content-Type': 'application/json'
-        }
+        },
+        credentials: 'include'
     });
     const goals: GoalType[] = await response.json();
     return goals;
@@ -28,7 +29,8 @@ export async function CreateGoal(goal: GoalType): Promise<GoalType> {
         body: JSON.stringify(goal),
         headers: {
             "Content-Type": "application/json; charset=UTF-8"
-        }
+        },
+        credentials: 'include'
     });
     if (!response.ok) { 
         // Lanza un error para que pueda ser capturado por el try/catch en Details.jsx
@@ -48,7 +50,8 @@ export async function UpdateGoal(goal: GoalType): Promise<GoalType> {
         body: JSON.stringify(goal),
         headers: {
             "Content-Type": "application/json; charset=UTF-8"
-        }
+        },
+        credentials: 'include'
     });
     const updatedGoal: GoalType = await response.json();
     console.log("Goal updated", updatedGoal);
@@ -57,7 +60,8 @@ export async function UpdateGoal(goal: GoalType): Promise<GoalType> {
 
 export async function DeleteGoal(id: number): Promise<void> {
     const response = await fetch(`${API_BASE_URL}/api/goals/${id}`, {
-        method: "DELETE"
+        method: "DELETE",
+        credentials: 'include'
     }
     );
     console.log("Goal deleted", id);

@@ -12,6 +12,7 @@ export async function signup(credentials: CredentialsType): Promise<Token> {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(credentials),
+        credentials: 'include'
     });
     if (response.status !== 200)  throw new Error('Signup failed');
     const token: Token = await response.json();
