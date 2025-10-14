@@ -24,7 +24,8 @@ export async function login(credentials: CredentialsType): Promise<Token> {
         body: JSON.stringify(credentials),
         headers: {
             'Content-Type': 'application/json',
-        }
+        },
+        credentials: 'include'
     });
     if (response.status !== 200)  throw new Error('Login failed');
     const token: Token = await response.json();
