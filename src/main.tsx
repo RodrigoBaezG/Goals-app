@@ -7,7 +7,7 @@ import AuthMemory from "./memory/Auth.jsx";
 
 const rootElement = document.getElementById("root");
 
-const REPOSITORY_NAME = "/Goals-app";
+const REPOSITORY_NAME = "/Goals-app/";
 
 // Check if the root element exists before creating the root
 if (rootElement) {
