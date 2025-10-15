@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
-import { BrowserRouter, HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import GoalsMemory from "./memory/Goals.tsx";
 import AuthMemory from "./memory/Auth.jsx";
 
@@ -15,9 +15,9 @@ if (rootElement) {
         <StrictMode>
             <AuthMemory>
             <GoalsMemory>
-                <HashRouter basename={REPOSITORY_NAME}>
+                <BrowserRouter basename={REPOSITORY_NAME}>
                     <App />
-                </HashRouter>
+                </BrowserRouter>
             </GoalsMemory>
             </AuthMemory>
         </StrictMode>,
