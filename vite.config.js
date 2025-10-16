@@ -7,7 +7,7 @@ const repoName = "Goals-app";
 // https://vite.dev/config/
 export default defineConfig({
     plugins: [tailwindcss(), react()],
-    base: './',
+    base: `/${repoName}/`,
     server: {
         proxy: {
             // Si la URL de React empieza con '/api', redirige al backend
