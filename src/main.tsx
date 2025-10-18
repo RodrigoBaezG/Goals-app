@@ -7,7 +7,6 @@ import AuthMemory from "./memory/Auth.jsx";
 
 const rootElement = document.getElementById("root");
 
-const REPOSITORY_NAME = "/Goals-app";
 
 // Check if the root element exists before creating the root
 if (rootElement) {
@@ -15,7 +14,7 @@ if (rootElement) {
         <StrictMode>
             <AuthMemory>
             <GoalsMemory>
-                <BrowserRouter basename={REPOSITORY_NAME}>
+                <BrowserRouter>
                     <App />
                 </BrowserRouter>
             </GoalsMemory>
