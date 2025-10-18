@@ -20,6 +20,9 @@ function App() {
     const [authState, authDispatch] = useContext(AuthContext);
     const { token } = authState;
 
+    // CORRECCIÓN CLAVE 1: Estado para controlar si las metas ya fueron cargadas
+    const [goalsLoaded, setGoalsLoaded] = useState(false);
+
     useEffect(() => {
         const storedToken = localStorage.getItem('authToken');
         
@@ -38,22 +41,30 @@ function App() {
         const tokenString = token?.token;
          
         // 2. CONDICIÓN DE CORTE: Si no hay token en el Contexto, salimos y esperamos.
-        if (!tokenString) { 
-            console.log("Esperando token de Contexto. Omite la carga de metas.");
+        if (!tokenString || goalsLoaded) { 
+            if (!tokenString) {
+                console.log("Esperando token de Contexto. Omite la carga de metas.");
+            }
             return;
         }
-        
-        console.log("Token válido en Contexto. Cargando metas...");
+
+        console.log("Token válido en Contexto. Iniciando RequestGoals...");
 
         async function FetchData() {
-            // Se pasa la cadena JWT al servicio de metas
-            const goals = await RequestGoals(tokenString); 
-            dispatch({ type: "add_goal", goals }); 
+            try {
+                const goals = await RequestGoals(tokenString); 
+                dispatch({ type: "add_goal", goals }); 
+                // 2. Marcar como cargadas para que no se vuelva a ejecutar
+                setGoalsLoaded(true); 
+            } catch (error) {
+                console.error("Error al cargar metas:", error);
+                // Si falla la carga, podríamos resetear el token para forzar login
+            }
         }
         
         FetchData();
         
-    }, [dispatch, token?.token]); // <--- DEPENDENCIA: token completo.
+    }, [dispatch, token?.token, goalsLoaded]); // <--- DEPENDENCIA: token completo.
 
     
 
