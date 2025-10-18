@@ -12,6 +12,7 @@ function Register() {
 
     const signupDispatch = async (form) => {
         const token = await signup(form);
+        localStorage.setItem('authToken', token.token);
         Authreducer({type: 'add', token});
         navigate('/list');
     };

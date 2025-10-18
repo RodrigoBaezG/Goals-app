@@ -5,6 +5,7 @@ interface Token {
     token: string;      
 };
 
+
 export async function signup(credentials: CredentialsType): Promise<Token> {
     const response = await fetch(`${API_BASE_URL}/api/signup`, {
         method: 'POST',

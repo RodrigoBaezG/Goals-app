@@ -41,12 +41,29 @@ function Details() {
     const navigate = useNavigate();
 
     const crear = async () => {
-        const newGoal = await CreateGoal(form);
-        dispatch({
-            type: "create_goal",
-            goal: newGoal,
-        });
-        navigate("/list");
+        // 1. RECUPERAR EL TOKEN (Asumiendo que ya lo guardaste en Register.jsx)
+        const token = localStorage.getItem('authToken');
+        
+        if (!token) {
+            // Si no hay token, redirigimos al login para evitar el error 401
+            console.error("Token de autorización no encontrado. Redirigiendo a acceso.");
+            return navigate('/access'); 
+        }
+        
+        try {
+            // 2. PASAR EL TOKEN a la función CreateGoal
+            // Antes: const newGoal = await CreateGoal(form);
+            const newGoal = await CreateGoal(form, token); // <--- CAMBIO CLAVE
+            
+            dispatch({
+                type: "create_goal",
+                goal: newGoal,
+            });
+            navigate("/list");
+        } catch (error) {
+            console.error("Error al crear la meta:", error);
+            // Manejar errores de la API aquí
+        }
     };
 
     const cancel = () => {

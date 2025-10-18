@@ -23,11 +23,16 @@ export async function RequestGoal(id: number): Promise<GoalType> {
     return goal;
 }
 
-export async function CreateGoal(goal: GoalType): Promise<GoalType> {
+export async function CreateGoal(goal: GoalType, token: string): Promise<GoalType> {
+    if (!token) {
+        throw new Error("No authorization token was found"); 
+    }
     const response = await fetch(`${API_BASE_URL}/api/goals`, {
         method: "POST",
         body: JSON.stringify(goal),
         headers: {
+            // AÑADIR ESTE ENCABEZADO
+            'Authorization': `Bearer ${token}`, // <-- CLAVE: Envío del JWT
             "Content-Type": "application/json; charset=UTF-8"
         },
         credentials: 'include'
