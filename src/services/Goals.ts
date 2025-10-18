@@ -49,11 +49,15 @@ export async function CreateGoal(goal: GoalType, token: string): Promise<GoalTyp
     return goalCreated;
 }
 
-export async function UpdateGoal(goal: GoalType): Promise<GoalType> {
-    const response = await fetch(`${API_BASE_URL}/api/goals/${goal.id}`, {
-        method: "PUT",
+export async function UpdateGoal(goal: GoalType, token: string): Promise<GoalType> {
+    if (!token) {
+        throw new Error("Authorization token is required to update a goal."); 
+    }
+    const response = await fetch(`${API_BASE_URL}/api/goals`, {
+        method: "PUT", // O PATCH, dependiendo de tu backend
         body: JSON.stringify(goal),
         headers: {
+            'Authorization': `Bearer ${token}`, // <-- AÑADIR ESTE ENCABEZADO
             "Content-Type": "application/json; charset=UTF-8"
         },
         credentials: 'include'
@@ -63,11 +67,17 @@ export async function UpdateGoal(goal: GoalType): Promise<GoalType> {
     return updatedGoal;
 }
 
-export async function DeleteGoal(id: number): Promise<void> {
+export async function DeleteGoal(id: number, token: string): Promise<void> {
+    if (!token) {
+        throw new Error("Authorization token is required to delete a goal."); 
+    }
     const response = await fetch(`${API_BASE_URL}/api/goals/${id}`, {
         method: "DELETE",
+        headers: {
+            'Authorization': `Bearer ${token}`, // <-- AÑADIR ESTE ENCABEZADO
+            "Content-Type": "application/json; charset=UTF-8"
+        },
         credentials: 'include'
-    }
-    );
+    });
     console.log("Goal deleted", id);
 }

@@ -71,15 +71,41 @@ function Details() {
     };
 
     const update = async () => {
-        const updatedGoal = await UpdateGoal(form);
-        dispatch({ type: "update", goal: updatedGoal });
-        navigate("/list");
+        // 1. RECUPERAR EL TOKEN
+        const token = localStorage.getItem('authToken');
+        
+        if (!token) {
+            console.error("Token de autorización no encontrado. Redirigiendo a acceso.");
+            return navigate('/access'); 
+        }
+
+        try {
+            // 2. PASAR EL TOKEN
+            const updatedGoal = await UpdateGoal(form, token); // <-- CAMBIO CLAVE
+            dispatch({ type: "update", goal: updatedGoal });
+            navigate("/list");
+        } catch (error) {
+            console.error("Error al actualizar la meta:", error);
+        }
     };
 
     const deleteGoal = async () => {
-        await DeleteGoal(form.id);
-        dispatch({ type: "delete", id: form.id });
-        navigate("/list");
+        // 1. RECUPERAR EL TOKEN
+        const token = localStorage.getItem('authToken');
+        
+        if (!token) {
+            console.error("Token de autorización no encontrado. Redirigiendo a acceso.");
+            return navigate('/access'); 
+        }
+
+        try {
+            // 2. PASAR EL TOKEN
+            await DeleteGoal(form.id, token); // <-- CAMBIO CLAVE
+            dispatch({ type: "delete", id: form.id });
+            navigate("/list");
+        } catch (error) {
+            console.error("Error al eliminar la meta:", error);
+        }
     };
 
     return (
