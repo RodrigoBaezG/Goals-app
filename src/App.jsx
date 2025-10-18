@@ -34,26 +34,26 @@ function App() {
 
     // useEffect EXISTENTE: CARGA LAS METAS
     useEffect(() => {
-        // Usamos la cadena JWT real del Contexto o de localStorage
-        const tokenString = token?.token || localStorage.getItem('authToken');
+        // 1. OBTENER EL TOKEN: Solo del Contexto (token es { token: "..." })
+        const tokenString = token?.token;
          
-        if (!tokenString || tokenString.length === 0) {
-            console.log("Token no válido o vacío. Omite la carga de metas.");
+        // 2. CONDICIÓN DE CORTE: Si no hay token en el Contexto, salimos y esperamos.
+        if (!tokenString) { 
+            console.log("Esperando token de Contexto. Omite la carga de metas.");
             return;
         }
         
-        console.log("Token válido encontrado. Cargando metas...");
+        console.log("Token válido en Contexto. Cargando metas...");
 
         async function FetchData() {
             // Se pasa la cadena JWT al servicio de metas
             const goals = await RequestGoals(tokenString); 
-            // Asumo que tu reducer acepta 'add_goal' para llenar el store
             dispatch({ type: "add_goal", goals }); 
         }
         
         FetchData();
         
-    }, [dispatch, token?.token]);
+    }, [dispatch, token]); // <--- DEPENDENCIA: token completo.
 
     
 

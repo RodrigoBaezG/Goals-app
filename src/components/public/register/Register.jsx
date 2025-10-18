@@ -11,7 +11,7 @@ function Register() {
     const [auth, Authreducer] = useContext(AuthContext);
 
     const signupDispatch = async (form) => {
-        const token = await signup(form);
+        const tokenObject = await signup(form);
         localStorage.setItem('authToken', tokenObject.token);
         Authreducer({type: 'add', token: tokenObject});
         navigate('/list');
