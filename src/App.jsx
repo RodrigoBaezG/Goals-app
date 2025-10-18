@@ -53,7 +53,7 @@ function App() {
         
         FetchData();
         
-    }, [dispatch, token]); // <--- DEPENDENCIA: token completo.
+    }, [dispatch, token?.token]); // <--- DEPENDENCIA: token completo.
 
     
 
