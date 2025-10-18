@@ -13,6 +13,7 @@ import Access from "./components/public/access/Access.jsx";
 import Register from "./components/public/register/Register.jsx";
 import Authenticate from "./components/shared/Authenticate.jsx";
 import { AuthContext } from "./memory/Context.tsx";
+import { useState } from "react";
 
 function App() {
 
