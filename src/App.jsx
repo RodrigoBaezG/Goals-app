@@ -17,24 +17,43 @@ import { AuthContext } from "./memory/Context.tsx";
 function App() {
 
     const [, dispatch] = useContext(GoalsContext);
-    const [authState] = useContext(AuthContext);
+    const [authState, authDispatch] = useContext(AuthContext);
     const { token } = authState;
 
     useEffect(() => {
-         if (!token || token.length === 0) {
+        const storedToken = localStorage.getItem('authToken');
+        
+        // Si hay un token guardado PERO el Contexto está vacío, lo restauramos.
+        // También previene un dispatch si ya está en el Contexto.
+        if (storedToken && (!token || token.token !== storedToken)) {
+             // Dispatch para poner el token en formato objeto de vuelta en el Contexto
+             authDispatch({ type: 'add', token: { token: storedToken } });
+        }
+    }, [authDispatch, token]); 
+
+
+    // useEffect EXISTENTE: CARGA LAS METAS
+    useEffect(() => {
+        // Usamos la cadena JWT real del Contexto o de localStorage
+        const tokenString = token?.token || localStorage.getItem('authToken');
+         
+        if (!tokenString || tokenString.length === 0) {
             console.log("Token no válido o vacío. Omite la carga de metas.");
             return;
         }
         
         console.log("Token válido encontrado. Cargando metas...");
-        console.log("Token changed");
 
         async function FetchData() {
-            const goals = await RequestGoals(token);
-            dispatch({ type: "add_goal", goals });
+            // Se pasa la cadena JWT al servicio de metas
+            const goals = await RequestGoals(tokenString); 
+            // Asumo que tu reducer acepta 'add_goal' para llenar el store
+            dispatch({ type: "add_goal", goals }); 
         }
+        
         FetchData();
-    }, [dispatch, token]);
+        
+    }, [dispatch, token?.token]);
 
     
 

@@ -53,7 +53,7 @@ export async function UpdateGoal(goal: GoalType, token: string): Promise<GoalTyp
     if (!token) {
         throw new Error("Authorization token is required to update a goal."); 
     }
-    const response = await fetch(`${API_BASE_URL}/api/goals`, {
+    const response = await fetch(`${API_BASE_URL}/api/goals/${goal.id}`, {
         method: "PUT", // O PATCH, dependiendo de tu backend
         body: JSON.stringify(goal),
         headers: {

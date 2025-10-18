@@ -32,6 +32,10 @@ function Details() {
         if (!goalMemory) {
             return navigate("/404");
         }
+        if (goalMemory.deadline && goalMemory.deadline.includes('T')) {
+            // Separa la fecha del resto de la cadena ISO (ej: "2025-10-18")
+            goalMemory.deadline = goalMemory.deadline.split('T')[0];
+        }
         setForm(goalMemory);
     }, [id]);
 
