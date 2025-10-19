@@ -9,45 +9,35 @@ import { AuthContext } from "../../../memory/Context.tsx";
 
 function List() {
     const [state, dispatch] = useContext(GoalsContext);
+    const [authState] = useContext(AuthContext);
+    const { token } = authState;
 
-    // const [authState] = useContext(AuthContext);
-    // const { token } = authState; // token es el objeto { token: "string" }
+    useEffect(() => {
+        const tokenString = token?.token;
 
-    // useEffect(() => {
+        // 1. CONDICIÓN ESTABLE: Esperar el token.
+        // 2. CONDICIÓN DE NO DUPLICACIÓN: Si ya tenemos metas, no volvemos a cargar.
+        if (!tokenString || state.order.length > 0) return;
 
-    //     if (!token) return; // Espera a tener token antes de hacer fetch
+        console.log("List.jsx: Token ESTABLE detectado. Iniciando RequestGoals...");
 
-    //     console.log("List.jsx: Token válido. Iniciando RequestGoals.", token);
+        async function FetchData() {
+            try {
+                // Usamos la cadena del token
+                const goals = await RequestGoals(tokenString);
+                if (Array.isArray(goals)) {
+                    dispatch({ type: "add_goal", goals });
+                }
+            } catch (error) {
+                console.error("Error al obtener metas:", error);
+            }
+        }
 
-    //     async function FetchData() {
-    //         // Usamos la cadena del token
-    //         try {
-    //             const goals = await RequestGoals(token.token); //token.token???
-    //             // Asegúrate de que 'goals' es un array
-    //             if (Array.isArray(goals)) {
-    //                 dispatch({ type: "add_goal", goals });
-    //             } else {
-    //                 console.error("La respuesta del backend no es un array:", goals);
-    //             }
-    //         } catch (error) {
-    //             console.error("Error al obtener metas:", error);
-    //         }
-    //     }
-
-    //     FetchData();
-
-    // }, [dispatch, token?.token]); // Se dispara cuando el token esté disponible.
+        FetchData();
+        // Dependencia CLAVE: Solo se dispara si cambia la cadena del token o el dispatch.
+    }, [dispatch, token?.token, state.order.length]);
 
 
-    // const [, dispatch] = useContext(GoalsContext);
-
-    //     useEffect(() => {
-    //         async function FetchData() {
-    //             const goals = await RequestGoals();
-    //             dispatch({ type: "add_goal", goals });
-    //         }
-    //         FetchData();
-    //     }, [dispatch]);
 
     return (
         <>

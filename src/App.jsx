@@ -35,34 +35,34 @@ function App() {
 
 
     // useEffect EXISTENTE: CARGA LAS METAS
-    useEffect(() => {
-        // 1. OBTENER EL TOKEN: Solo del Contexto (token es { token: "..." })
-        const tokenString = token?.token;
+    // useEffect(() => {
+    //     // 1. OBTENER EL TOKEN: Solo del Contexto (token es { token: "..." })
+    //     const tokenString = token?.token;
          
-        // 2. CONDICIÓN DE CORTE: Si no hay token en el Contexto, salimos y esperamos.
-        if (!tokenString || goalsLoaded) { 
-             // Si el token desaparece, queremos volver a cargarlas la próxima vez.
-             if (!tokenString) setGoalsLoaded(false); 
-             return;
-        }
+    //     // 2. CONDICIÓN DE CORTE: Si no hay token en el Contexto, salimos y esperamos.
+    //     if (!tokenString || goalsLoaded) { 
+    //          // Si el token desaparece, queremos volver a cargarlas la próxima vez.
+    //          if (!tokenString) setGoalsLoaded(false); 
+    //          return;
+    //     }
 
-        console.log("Token válido en Contexto. Iniciando RequestGoals...");
+    //     console.log("Token válido en Contexto. Iniciando RequestGoals...");
 
-        async function FetchData() {
-            try {
-                const goals = await RequestGoals(tokenString); 
-                dispatch({ type: "add_goal", goals }); 
-                // 2. Marcar como cargadas para que no se vuelva a ejecutar
-                setGoalsLoaded(true); 
-            } catch (error) {
-                console.error("Error al cargar metas:", error);
-                // Si falla la carga, podríamos resetear el token para forzar login
-            }
-        }
+    //     async function FetchData() {
+    //         try {
+    //             const goals = await RequestGoals(tokenString); 
+    //             dispatch({ type: "add_goal", goals }); 
+    //             // 2. Marcar como cargadas para que no se vuelva a ejecutar
+    //             setGoalsLoaded(true); 
+    //         } catch (error) {
+    //             console.error("Error al cargar metas:", error);
+    //             // Si falla la carga, podríamos resetear el token para forzar login
+    //         }
+    //     }
         
-        FetchData();
+    //     FetchData();
         
-    }, [dispatch, token?.token, goalsLoaded]); // <--- DEPENDENCIA: token completo.
+    // }, [dispatch, token?.token, goalsLoaded]); // <--- DEPENDENCIA: token completo.
 
     
 
