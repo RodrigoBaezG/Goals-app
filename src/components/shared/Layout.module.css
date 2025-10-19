@@ -10,9 +10,10 @@
 }
 
 .main {
-    @apply flex flex-1 flex-col items-center h-full overflow-scroll bg-gradient-to-tl from-gray-300 to-gray-200;
+    @apply flex w-full flex-col items-center h-full overflow-scroll bg-gradient-to-tl from-gray-300 to-gray-200;
 }
 
 .icon {
     @apply h-6 mr-2;
 }
+

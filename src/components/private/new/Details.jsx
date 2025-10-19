@@ -113,9 +113,9 @@ function Details() {
     };
 
     return (
-        <div className="flex justify-center items-center">
-            <div className={'card ' + DetailsCss.details}>
-                <form className="p-4">
+        <div className={DetailsCss.details}>
+            <div className={'card ' + DetailsCss.content + "card"}>
+                <form className={DetailsCss.scrollableForm}>
                     <label className="label">
                         Details
                         <input
