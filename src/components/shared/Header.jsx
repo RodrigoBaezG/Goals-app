@@ -4,6 +4,18 @@ import profileIcon from "../../img/profile.svg";
 import LinkTo from "./LinkTo";
 
 function Header() {
+
+    const [, authDispatch] = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        // 1. Ejecutar la acción 'logout' (que borra localStorage)
+        authDispatch({ type: 'logout' });
+        
+        // 2. Redirigir al usuario a la página pública
+        navigate('/access'); 
+    };
+
     return (
         <header className={HeaderCss.header}>
             <div className={HeaderCss.titleContainer}>
@@ -16,6 +28,7 @@ function Header() {
                     Goals app
                 </a>
             </div>
+            <button onClick={handleLogout}>Logout</button>
             <nav>
                 <LinkTo to="/profile">
                     <img className={HeaderCss.icon} src={profileIcon} />
