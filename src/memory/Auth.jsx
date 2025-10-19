@@ -15,7 +15,7 @@ function reducer(state, action) {
             console.log("Adding token", action.token);
             const jwtString = action.token.token;
             const newState = {
-                token: jwtString,
+                token: { token: jwtString },
                 authenticate: true
             };
             console.log("New state", newState);

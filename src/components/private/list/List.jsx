@@ -12,28 +12,36 @@ function List() {
     const [authState] = useContext(AuthContext);
     const { token } = authState;
 
+    const [goalsLoaded, setGoalsLoaded] = useState(false);
+
     useEffect(() => {
         const tokenString = token?.token;
 
-        // 1. CONDICIÓN ESTABLE: Esperar el token.
-        // 2. CONDICIÓN DE NO DUPLICACIÓN: Si ya tenemos metas, no volvemos a cargar.
-        if (!tokenString || state.order.length > 0) return;
-
-        console.log("List.jsx: Token ESTABLE detectado. Iniciando RequestGoals...");
-
-        async function FetchData() {
-            try {
-                // Usamos la cadena del token
-                const goals = await RequestGoals(tokenString);
-                if (Array.isArray(goals)) {
-                    dispatch({ type: "add_goal", goals });
-                }
-            } catch (error) {
-                console.error("Error al obtener metas:", error);
-            }
+        // 1. Lógica de RESET: Si el token se va (logout), reseteamos la bandera.
+        if (!tokenString) {
+            if (goalsLoaded) setGoalsLoaded(false);
+            return;
         }
 
-        FetchData();
+        // 2. Lógica de CARGA: Solo si tenemos un token Y aún no hemos cargado en esta sesión.
+        if (tokenString && !goalsLoaded) {
+            console.log("List.jsx: Token ESTABLE detectado. Iniciando RequestGoals...");
+
+            async function FetchData() {
+                try {
+                    // Usamos la cadena del token
+                    const goals = await RequestGoals(tokenString);
+                    if (Array.isArray(goals)) {
+                        dispatch({ type: "add_goal", goals });
+                        setGoalsLoaded(true); // 💡 Marcar como cargado
+                    }
+                } catch (error) {
+                    console.error("Error al obtener metas:", error);
+                }
+            }
+
+            FetchData();
+        }
         // Dependencia CLAVE: Solo se dispara si cambia la cadena del token o el dispatch.
     }, [dispatch, token?.token, state.order.length]);
 
