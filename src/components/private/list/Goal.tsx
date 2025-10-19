@@ -9,8 +9,7 @@ interface GoalProps extends GoalType {}
 function Goal({ id, icon, details, period_, events, goal, completed }: GoalProps) {
     return (
         <Link to={`/list/${id}`} className={styles.goal + " card"}>
-            {/* GRUPO 1: Icono, Frecuencia, y Detalle */}
-            <div className="flex items-center justify-start w-full"> {/* Aseguramos alineación y ancho en móvil */}
+            <div className="flex items-center justify-center">
                 <div className={styles.icon}>{icon}</div>
                 <p className={styles.frecuency}>
                     {events}
@@ -18,11 +17,8 @@ function Goal({ id, icon, details, period_, events, goal, completed }: GoalProps
                 </p>
                 <p>{details}</p>
             </div>
-            
-            {/* GRUPO 2: Progreso y Botón */}
-            {/* 🛑 CAMBIO CLAVE: flex-col en móvil, y flex-row en escritorio. Ocupa el ancho completo (w-full). */}
-            <div className="flex flex-col md:flex-row items-center justify-between w-full mt-2">
-                <div className="relative mx-8 w-full md:w-auto"> {/* Hacemos que la barra ocupe todo el ancho en móvil */}
+            <div className="flex items-center">
+                <div className="relative m-5 mx-8">
                     <p className="text-center">
                         {completed} of {goal}
                     </p>
@@ -35,12 +31,10 @@ function Goal({ id, icon, details, period_, events, goal, completed }: GoalProps
                         ></div>
                     </div>
                 </div>
-                {/* 🛑 Botón toma el ancho completo en móvil */}
-                <button className="button--gray mr-2 w-full md:w-auto mt-2 md:mt-0">Completed</button>
+                <button className="button--gray mr-2">Completed</button>
             </div>
         </Link>
     );
 }
 
 export default Goal;
-

@@ -1,17 +1,8 @@
-/* Aside.module.css */
 @reference "tailwindcss";
 
-.aside {
-    /* 🛑 Por defecto (Móvil): Ocultar la barra lateral */
-    @apply hidden; 
-}
 
-/* 💻 Media Query para Escritorio (min-width: 768px) */
-@media (min-width: 768px) {
-    .aside {
-        /* En pantallas grandes: Mostrar y aplicar el layout original */
-        @apply flex flex-col text-gray-700 bg-gray-100 shadow w-60 h-full pt-2;
-    }
+.aside {
+    @apply flex flex-col text-gray-700 bg-gray-100 shadow w-60 h-full pt-2;
 }
 
 .icon {

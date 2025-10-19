@@ -1,25 +1,18 @@
-/* Layout.module.css */
 @reference "tailwindcss";
 
 .mainContainer {
     height: calc(100vh - 88px);
-    /* 🛑 Por defecto (Móvil): Usar flex-col (vertical) */
-    @apply flex flex-col overflow-hidden; 
+    @apply flex flex-row overflow-hidden;
 }
 
-/* 💻 Media Query para Escritorio (min-width: 768px) */
-@media (min-width: 768px) {
-    .mainContainer {
-        /* En pantallas grandes: Volver al layout horizontal (flex-row) */
-        @apply flex-row; 
-    }
+.aside {
+    @apply flex flex-col text-gray-700 bg-gray-100 shadow w-60 h-full pt-2;
 }
-
-/* El bloque .aside de este archivo es redundante y puede eliminarse si ya está en Aside.module.css */
-/* ... */
 
 .main {
-    /* .main ya tiene w-full, lo cual es bueno. */
     @apply w-full flex flex-col items-center h-full overflow-scroll bg-gradient-to-tl from-gray-300 to-gray-200;
 }
-/* ... */
+
+.icon {
+    @apply h-6 mr-2;
+}
