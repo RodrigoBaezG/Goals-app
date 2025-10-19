@@ -17,5 +17,5 @@
 }
 
 .logout {
-    @apply cursor-pointer hover: text-red-600;
+    @apply cursor-pointer hover:text-red-600;
 }
