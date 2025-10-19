@@ -113,9 +113,9 @@ function Details() {
     };
 
     return (
-        <div className={DetailsCss.details}>
-            <div className={'card ' + DetailsCss.content + "card"}>
-                <form className={DetailsCss.scrollableForm}>
+            <div className={DetailsCss.content}>
+                <div className=" card ">
+                    <form className={DetailsCss.scrollableForm }>
                     <label className="label">
                         Details
                         <input
@@ -211,8 +211,8 @@ function Details() {
                         Cancel
                     </button>
                 </div>
+                </div>
             </div>
-        </div>
     );
 }
 

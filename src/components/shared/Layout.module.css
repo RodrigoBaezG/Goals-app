@@ -2,7 +2,7 @@
 
 .mainContainer {
     height: calc(100vh - 88px);
-    @apply flex flex-row overflow-hidden;
+    @apply flex flex-row overflow-hidden; 
 }
 
 .aside {

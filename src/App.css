@@ -2,7 +2,7 @@
 @reference "tailwindcss";
 
 .card {
-    @apply m-3 w-xl text-gray-700 text-xs mx-4 rounded-xl shadow-[10px_10px_10px_#c5c5c5,_-5px_-5px_5px_#ffffff] bg-gray-50 overflow-hidden;
+    @apply w-4/5 pt-2 md:w-4/5 text-gray-700 text-xs mx-4 rounded-xl shadow-[10px_10px_10px_#c5c5c5,_-5px_-5px_5px_#ffffff] bg-gray-50 overflow-hidden;
 }
 
 .button {

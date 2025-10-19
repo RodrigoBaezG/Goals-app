@@ -5,6 +5,7 @@ import LinkTo from "./LinkTo";
 import { useContext } from "react";
 import { AuthContext } from "../../memory/Context.tsx";
 import { useNavigate } from "react-router-dom";
+import NewGoalIcon from "../../img/newgoal.svg";
 
 function Header() {
 
@@ -14,9 +15,9 @@ function Header() {
     const handleLogout = () => {
         // 1. Ejecutar la acción 'logout' (que borra localStorage)
         authDispatch({ type: 'logout' });
-        
+
         // 2. Redirigir al usuario a la página pública
-        navigate('/access'); 
+        navigate('/access');
     };
 
     return (
@@ -31,8 +32,23 @@ function Header() {
                     Goals app
                 </a>
             </div>
+
+            <div className="md:hidden">
+                <LinkTo
+                to="/create"
+                // Clase de Tailwind para ocultar en md: y superiores
+                className="md:hidden flex items-center p-2 rounded-3xl hover:bg-gray-200"
+            >
+                <img
+                    className="h-6 w-6" // Estilos simplificados para el icono
+                    src={NewGoalIcon}
+                    alt="Create Goal Icon"
+                />
+            </LinkTo>
+            </div>
+
             <button onClick={handleLogout}
-                    className={HeaderCss.logout}>Logout</button>
+                className={HeaderCss.logout}>Logout</button>
             <nav>
                 <LinkTo to="/profile">
                     <img className={HeaderCss.icon} src={profileIcon} />
