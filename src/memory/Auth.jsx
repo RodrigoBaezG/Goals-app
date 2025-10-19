@@ -40,6 +40,13 @@ function reducer(state, action) {
 function AuthMemory({ children }) {
     const value = useReducer(reducer, InitialState);
 
+    useEffect(() => {
+        const storedToken = localStorage.getItem("authToken");
+        if (storedToken) {
+            dispatch({ type: "add", token: { token: storedToken } });
+        }
+    }, []);
+
     return (
         <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
     );

@@ -7,7 +7,7 @@ function Authenticate() {
     const [auth] = useContext(AuthContext);
 
     if (!auth.authenticate) {
-        return <Navigate to="/access" />;
+        return <Navigate to="/access" replace />;
     }
     
     return <Outlet></Outlet>;

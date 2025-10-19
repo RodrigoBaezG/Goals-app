@@ -13,6 +13,17 @@ export async function RequestGoals(token: string) : Promise<GoalType[]> {
         },
         credentials: 'include'
     });
+
+    if (!response.ok) {
+        if (response.status === 401) {
+            console.warn("Token inválido o expirado. Redirigiendo al login...");
+            localStorage.removeItem("authToken");
+            // devolvemos array vacío para evitar errores de map
+            return [];
+        }
+        throw new Error(`Error HTTP ${response.status}`);
+    }
+
     const goals: GoalType[] = await response.json();
     return goals;
 }
