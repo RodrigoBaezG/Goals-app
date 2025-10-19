@@ -1,5 +1,6 @@
 import { useReducer } from "react";
 import { AuthContext } from "./Context.tsx";
+import { useEffect } from "react";
 
 const storedToken = localStorage.getItem("authToken");
 
