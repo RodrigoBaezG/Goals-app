@@ -39,7 +39,7 @@ function reducer(state, action) {
 };
 
 function AuthMemory({ children }) {
-    const value = useReducer(reducer, InitialState);
+    const [value, dispatch] = useReducer(reducer, InitialState);
 
     useEffect(() => {
         const storedToken = localStorage.getItem("authToken");
