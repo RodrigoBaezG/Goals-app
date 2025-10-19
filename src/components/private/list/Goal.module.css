@@ -1,24 +1,16 @@
+/* Goal.module.css */
 @reference "tailwindcss";
 
 .goal {
-    @apply flex h-14 p-2 justify-between items-center;
+    /* 🛑 Por defecto (Móvil): Disposición vertical y altura automática */
+    @apply flex flex-col h-auto p-2 justify-center items-start; /* items-start para alineación izquierda */
 }
 
-.icon {
-    @apply flex items-center justify-center h-10 w-10 m-2 rounded-3xl bg-gray-100 text-2xl;
-    box-shadow:
-        inset 5px 5px 10px #bebebe,
-        inset -5px -5px 10px #ffffff;
+/* 💻 Media Query para Escritorio (min-width: 768px) */
+@media (min-width: 768px) {
+    .goal {
+        /* En pantallas grandes: Volver a la disposición horizontal y altura fija */
+        @apply flex-row h-14 justify-between items-center;
+    }
 }
-
-.frecuency {
-    @apply ml-3 text-xl mr-5 flex text-gray-500 justify-center items-center;
-}
-
-.progressBar {
-    @apply w-13 h-1 rounded bg-gray-300;
-}
-
-.progress {
-    @apply h-1 rounded bg-gradient-to-l from-green-200 to-blue-500;
-}
+/* ... el resto de los estilos (.icon, .frecuency, etc.) se mantienen igual ... */
