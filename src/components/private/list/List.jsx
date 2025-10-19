@@ -22,7 +22,7 @@ function List() {
         async function FetchData() {
             // Usamos la cadena del token
             try {
-                const goals = await RequestGoals(token); //token.token???
+                const goals = await RequestGoals(token.token); //token.token???
                 // Asegúrate de que 'goals' es un array
                 if (Array.isArray(goals)) {
                     dispatch({ type: "add_goal", goals });
@@ -51,11 +51,9 @@ function List() {
 
     return (
         <>
-            {state.order?.length > 0 ? (
-                state.order.map((id) => <Goal key={id} {...state.objects[id]} />)
-            ) : (
-                <p>No goals yet.</p>
-            )}
+            {state.order.map((id) => (
+                <Goal key={id} {...state.objects[id]} />
+            ))}
             <Outlet />
         </>
     );
