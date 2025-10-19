@@ -15,37 +15,23 @@ import Authenticate from "./components/shared/Authenticate.jsx";
 import { AuthContext } from "./memory/Context.tsx";
 import { useState } from "react";
 
-
 function App() {
 
-    const [authState, authDispatch] = useContext(AuthContext);
-    const { token } = authState;
-    
-    // CORRECCIÓN CLAVE: Estado para controlar si el chequeo inicial ha terminado.
-    const [isAuthChecked, setIsAuthChecked] = useState(false); 
+    // const [, dispatch] = useContext(GoalsContext);
+    // const [authState, authDispatch] = useContext(AuthContext);
+    // const { token } = authState;
 
-    // BLOQUE 1: Restauración de Sesión y MARCADO DE CHECKEO
-    useEffect(() => {
-        const storedToken = localStorage.getItem('authToken');
-        const currentTokenValue = token?.token; 
+    // CORRECCIÓN CLAVE 1: Estado para controlar si las metas ya fueron cargadas
+    // const [goalsLoaded, setGoalsLoaded] = useState(false);
 
-        // 1. Lógica de Restauración: Si hay token en storage Y no está en Contexto, lo despachamos.
-        if (storedToken && storedToken !== currentTokenValue) {
-             authDispatch({ type: 'add', token: { token: storedToken } });
-        }
+    // useEffect(() => {
+    //     const storedToken = localStorage.getItem('authToken');
         
-        // 2. Marcar como checked: En el primer render o después del dispatch, marcamos como finalizado.
-        if (!isAuthChecked) {
-            setIsAuthChecked(true);
-        }
-        
-    }, [authDispatch, token, isAuthChecked]); 
-
-    // **FINAL FIX:** Esperar a que el chequeo de autenticación termine.
-    if (!isAuthChecked) {
-        // Muestra un loading o spinner mientras se restaura la sesión
-        return <div>Cargando sesión...</div>; 
-    } 
+    //     // Comprobar si hay token en localStorage Y si NO está en el Contexto.
+    //     if (storedToken && !token?.token) { // Usamos token?.token para chequear el valor string
+    //          authDispatch({ type: 'add', token: { token: storedToken } });
+    //     }
+    // }, [authDispatch, token]); 
 
 
     // useEffect EXISTENTE: CARGA LAS METAS
