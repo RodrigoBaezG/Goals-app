@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import { RequestGoals } from "../../../services/Goals.ts";
 import { AuthContext } from "../../../memory/Context.tsx";
+import { useState } from "react";
 
 
 function List() {
