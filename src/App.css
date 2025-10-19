@@ -6,7 +6,7 @@
 }
 
 .button {
-    @apply flex justify-center items-center p-2 m-2 font-bold h-8;
+    @apply flex justify-center items-center p-2 m-2 font-bold h-8 cursor-pointer;
 }
 
 .button--gray {
