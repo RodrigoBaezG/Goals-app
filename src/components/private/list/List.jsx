@@ -10,33 +10,33 @@ import { AuthContext } from "../../../memory/Context.tsx";
 function List() {
     const [state, dispatch] = useContext(GoalsContext);
 
-    const [authState] = useContext(AuthContext);
-    const { token } = authState; // token es el objeto { token: "string" }
+    // const [authState] = useContext(AuthContext);
+    // const { token } = authState; // token es el objeto { token: "string" }
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (!token) return; // Espera a tener token antes de hacer fetch
+    //     if (!token) return; // Espera a tener token antes de hacer fetch
 
-        console.log("List.jsx: Token válido. Iniciando RequestGoals.", token);
+    //     console.log("List.jsx: Token válido. Iniciando RequestGoals.", token);
 
-        async function FetchData() {
-            // Usamos la cadena del token
-            try {
-                const goals = await RequestGoals(token.token); //token.token???
-                // Asegúrate de que 'goals' es un array
-                if (Array.isArray(goals)) {
-                    dispatch({ type: "add_goal", goals });
-                } else {
-                    console.error("La respuesta del backend no es un array:", goals);
-                }
-            } catch (error) {
-                console.error("Error al obtener metas:", error);
-            }
-        }
+    //     async function FetchData() {
+    //         // Usamos la cadena del token
+    //         try {
+    //             const goals = await RequestGoals(token.token); //token.token???
+    //             // Asegúrate de que 'goals' es un array
+    //             if (Array.isArray(goals)) {
+    //                 dispatch({ type: "add_goal", goals });
+    //             } else {
+    //                 console.error("La respuesta del backend no es un array:", goals);
+    //             }
+    //         } catch (error) {
+    //             console.error("Error al obtener metas:", error);
+    //         }
+    //     }
 
-        FetchData();
+    //     FetchData();
 
-    }, [dispatch, token?.token]); // Se dispara cuando el token esté disponible.
+    // }, [dispatch, token?.token]); // Se dispara cuando el token esté disponible.
 
 
     // const [, dispatch] = useContext(GoalsContext);
