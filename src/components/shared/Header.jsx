@@ -2,6 +2,9 @@ import HeaderCss from "./Header.module.css";
 import GoalsAppIcon from "../../img/GoalsAppIcon.svg";
 import profileIcon from "../../img/profile.svg";
 import LinkTo from "./LinkTo";
+import { useContext } from "react";
+import { AuthContext } from "../../memory/Context.tsx";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
 
