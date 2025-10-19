@@ -17,7 +17,7 @@ function List() {
 
         if (!token) return; // Espera a tener token antes de hacer fetch
 
-        console.log("List.jsx: Token válido. Iniciando RequestGoals.");
+        console.log("List.jsx: Token válido. Iniciando RequestGoals.", token);
 
         async function FetchData() {
             // Usamos la cadena del token
