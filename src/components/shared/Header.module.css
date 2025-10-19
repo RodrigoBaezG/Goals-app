@@ -15,3 +15,7 @@
 .icon {
     @apply h-8;
 }
+
+.logout {
+    @apply absolute right-4 cursor-pointer hover:bg-red-600;
+}

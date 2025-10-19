@@ -31,7 +31,8 @@ function Header() {
                     Goals app
                 </a>
             </div>
-            <button onClick={handleLogout}>Logout</button>
+            <button onClick={handleLogout}
+                    className={HeaderCss.logout}>Logout</button>
             <nav>
                 <LinkTo to="/profile">
                     <img className={HeaderCss.icon} src={profileIcon} />
