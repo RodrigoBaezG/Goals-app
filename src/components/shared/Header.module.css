@@ -17,5 +17,5 @@
 }
 
 .logout {
-    @apply absolute right-4 cursor-pointer hover:bg-red-600;
+    @apply cursor-pointer hover: text-red-600;
 }
