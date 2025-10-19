@@ -22,7 +22,7 @@ function List() {
         async function FetchData() {
             // Usamos la cadena del token
             try {
-                const goals = await RequestGoals(token.token); //token.token???
+                const goals = await RequestGoals(token); //token.token???
                 // Asegúrate de que 'goals' es un array
                 if (Array.isArray(goals)) {
                     dispatch({ type: "add_goal", goals });
