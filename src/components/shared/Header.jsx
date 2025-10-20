@@ -9,8 +9,10 @@ import NewGoalIcon from "../../img/newgoal.svg";
 
 function Header() {
 
-    const [, authDispatch] = useContext(AuthContext);
+    const [authState, authDispatch] = useContext(AuthContext);
     const navigate = useNavigate();
+
+    const isAuthenticated = !!authState.token;
 
     const handleLogout = () => {
         // 1. Ejecutar la acción 'logout' (que borra localStorage)
@@ -32,23 +34,28 @@ function Header() {
                     Goals app
                 </a>
             </div>
+            {isAuthenticated && (
+                <>
+                    <div className="md:hidden">
 
-            <div className="md:hidden">
-                <LinkTo
-                to="/create"
-                // Clase de Tailwind para ocultar en md: y superiores
-                className="md:hidden flex items-center p-2 rounded-3xl hover:bg-gray-200"
-            >
-                <img
-                    className="h-6 w-6" // Estilos simplificados para el icono
-                    src={NewGoalIcon}
-                    alt="Create Goal Icon"
-                />
-            </LinkTo>
-            </div>
+                        <LinkTo
+                            to="/create"
+                            // Clase de Tailwind para ocultar en md: y superiores
+                            className="md:hidden flex items-center p-2 rounded-3xl hover:bg-gray-200"
+                        >
+                            <img
+                                className="h-6 w-6" // Estilos simplificados para el icono
+                                src={NewGoalIcon}
+                                alt="Create Goal Icon"
+                            />
+                        </LinkTo>
+                    </div>
 
-            <button onClick={handleLogout}
-                className={HeaderCss.logout}>Logout</button>
+                    <button onClick={handleLogout}
+                        className={HeaderCss.logout}>Logout</button>
+
+                </>
+            )}
             <nav>
                 <LinkTo to="/profile">
                     <img className={HeaderCss.icon} src={profileIcon} />
