@@ -115,7 +115,7 @@ function Details() {
     return (
             <div className={DetailsCss.content}>
                 <div className=" card ">
-                    <form className={DetailsCss.scrollableForm }>
+                    <form className="m-3">
                     <label className="label">
                         Details
                         <input

@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 .goal {
-    @apply flex h-14 p-2 justify-between items-center;
+    @apply flex h-14 p-2 m-2 justify-between items-center;
 }
 
 .scrollableForm {
