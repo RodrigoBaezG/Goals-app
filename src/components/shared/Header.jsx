@@ -12,7 +12,7 @@ function Header() {
     const [authState, authDispatch] = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const isAuthenticated = !!authState.token;
+    const isAuthenticated = !!authState.authenticate;
 
     const handleLogout = () => {
         // 1. Ejecutar la acción 'logout' (que borra localStorage)
