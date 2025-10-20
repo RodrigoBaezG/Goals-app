@@ -1,7 +1,7 @@
 function Modal({ children }) {
     return (
-        <div className="flex items-center fixed inset-0 bg-gray-500/75 overflow-y-auto">
-            <div className="mx-auto w-4/5">{children}</div>
+        <div className="fixed inset-0 bg-gray-500/75 flex items-start justify-center pt-10 pb-20 px-4 z-40 overflow-y-auto">
+            <div className="w-full max-w-3xl max-h-full">{children}</div>
         </div>
     );
 }

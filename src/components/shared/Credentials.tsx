@@ -1,32 +1,42 @@
 import type { ChangeEvent } from "react";
 import styles from "./Credentials.module.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface CredentialsProps {
     send: Function;
     title: string;
     button: string;
+    condition: string;
+    conditionTitle: string;
+    button2: string;
+    url: string;
 }
 
 
-function Credentials({send, title, button}: CredentialsProps) {
+function Credentials({ send, title, button, button2, conditionTitle, condition, url }: CredentialsProps) {
     const [form, setForm] = useState({
         username: "",
         password: "",
     });
 
-    const { username, password} = form;
+    const { username, password } = form;
+    const navigate = useNavigate();
 
     const onChange = (event: ChangeEvent, prop: string) => {
         const value = (event.target as HTMLInputElement).value;
-        setForm((state) => ({...state, [prop]: value}));
+        setForm((state) => ({ ...state, [prop]: value }));
     }
 
     const onAccess = async (
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => { 
+    ) => {
         event.preventDefault();
         send(form);
+    };
+
+    function onGo(url: string) {
+         navigate(url);
     };
 
     return (
@@ -50,12 +60,20 @@ function Credentials({send, title, button}: CredentialsProps) {
                     />
                 </label>
             </form>
-            <div className="button">
+            <div className="flex justify-between items-center p-2 m-2 font-bold h-8 cursor-pointer">
                 <button
                     className="button button--black"
                     onClick={(e) => onAccess(e)}>
                     {button}
                 </button>
+                {conditionTitle === condition && (
+                    <>
+                        <button
+                            className="button button--gray"
+                            onClick={(e) => onGo(url)}>
+                            {button2}
+                        </button>
+                    </>)}
             </div>
 
         </div>

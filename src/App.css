@@ -2,11 +2,11 @@
 @reference "tailwindcss";
 
 .card {
-    @apply w-4/5 pt-2 md:w-4/5 text-gray-700 text-xs mx-4 rounded-xl shadow-[10px_10px_10px_#c5c5c5,_-5px_-5px_5px_#c5c5c5] bg-gray-50 overflow-hidden;
+    @apply w-4/5 pt-2 mb-5 md:w-4/5 text-gray-700 text-xs mx-4 rounded-xl shadow-[10px_10px_10px_#c5c5c5,_-5px_-5px_5px_#c5c5c5] bg-gray-50 overflow-hidden;
 }
 
 .button {
-    @apply flex justify-center items-center p-2 m-2 font-bold h-8 cursor-pointer;
+    @apply flex justify-center items-center p-2 m-2 font-bold h-8 cursor-pointer shadow-[5px_5px_10px_#c5c5c5];
 }
 
 .button--gray {

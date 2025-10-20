@@ -21,7 +21,11 @@ function Register() {
         <Credentials
             send={signupDispatch}
             title="Sign in"
-            button="Sign in">
+            button="Sign in"
+            condition="Sign in"
+            conditionTitle="Sign in"
+            button2="Log in"
+            url="/access">
         </Credentials>
      );
 }
