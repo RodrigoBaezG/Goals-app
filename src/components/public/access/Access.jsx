@@ -40,7 +40,7 @@ function Access() {
                 button="Log in"
                 condition="Log in"
                 conditionTitle="Log in"
-                button2="Register"
+                button2="Sign up"
                 url="/register">
             </Credentials>
     );
