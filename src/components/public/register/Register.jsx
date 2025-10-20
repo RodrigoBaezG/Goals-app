@@ -20,10 +20,10 @@ function Register() {
     return ( 
         <Credentials
             send={signupDispatch}
-            title="Sign in"
-            button="Sign in"
-            condition="Sign in"
-            conditionTitle="Sign in"
+            title="Sign up"
+            button="Sign up"
+            condition="Sign up"
+            conditionTitle="Sign up"
             button2="Log in"
             url="/access">
         </Credentials>
