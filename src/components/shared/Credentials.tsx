@@ -42,6 +42,12 @@ function Credentials({ send, title, button, button2, conditionTitle, condition, 
     return (
         <div className={'card ' + styles.auth + ' mx-auto max-w-4xl'}>
             <h1 className={styles.head + " text-center"}>{title}</h1>
+
+            <div>
+                <h4>Demo Access</h4>
+                <p>User: example@gmail.com</p>
+                <p>Password: 12345</p>
+            </div>
             <form className="p-4">
                 <label className="label">User
                     <input
