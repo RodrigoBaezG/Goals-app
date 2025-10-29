@@ -44,7 +44,7 @@ function Credentials({ send, title, button, button2, conditionTitle, condition, 
             <h1 className={styles.head + " text-center"}>{title}</h1>
 
             <div className="p-2 m-2">
-                <h4>Demo Access</h4>
+                <h3>Demo Access</h3>
                 <p>User: example@gmail.com</p>
                 <p>Password: 12345</p>
             </div>
